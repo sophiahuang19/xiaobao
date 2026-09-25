@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="摸摸小宝，听它讲关于自己的小秘密。">
+<meta name="description" content="摸摸小宝，抽一支小宝签。">
 <meta property="og:title" content="小宝">
-<meta property="og:description" content="摸摸小宝，听它讲关于自己的小秘密。">
+<meta property="og:description" content="摸摸小宝，抽一支小宝签。">
 <meta property="og:image" content="xiaobao.jpg">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box;height:100%}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>小宝</title>
@@ -80,28 +80,47 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .item .x{color:var(--pink);font-size:18px;line-height:1.5}
 .empty{color:var(--muted);font-size:14px;text-align:center;padding:28px 0}
 
-/* today's letter */
+/* 小宝签 */
 .topbar.left{left:14px;right:auto}
 .round .newdot{position:absolute;top:1px;right:1px;width:11px;height:11px;border-radius:50%;background:var(--pink);border:2px solid #fff}
-.letter{position:fixed;inset:0;z-index:20;background:rgba(14,9,6,.78);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:56px 16px calc(24px + env(safe-area-inset-bottom,0px));animation:fade .25s}
-.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:24px;line-height:42px;text-align:center}
-.env{position:relative;width:min(300px,78vw);aspect-ratio:1.5;perspective:800px;animation:bob 2.4s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-6px) rotate(-1deg)}}
-.env .body{position:absolute;inset:0;border-radius:14px;background:#F7F1EA;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);overflow:hidden}
-.env .body::before,.env .body::after{content:"";position:absolute;bottom:0;width:60%;height:70%;background:#EFE5DA}
-.env .body::before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}
-.env .body::after{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
-.env .flap{position:absolute;inset:0 0 auto 0;height:58%;background:#E9DDD0;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s ease;z-index:2;border-radius:14px 14px 0 0}
-.env .seal{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);z-index:3;width:54px;height:54px;border-radius:50%;background:var(--pink);display:grid;place-items:center;box-shadow:0 4px 10px rgba(120,40,50,.35);transition:opacity .25s}
-.env .seal svg{width:28px;height:28px;fill:#fff}
-.env.open{animation:none}
-.env.open .flap{transform:rotateX(180deg)}
-.env.open .seal{opacity:0}
-.letter-label{color:#fff;margin:0;font-size:15px;letter-spacing:.08em;opacity:.9}
-.cardimg{display:block;max-width:min(360px,100%);max-height:calc(100% - 60px);width:auto;height:auto;border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);animation:rise .55s cubic-bezier(.2,.8,.2,1);-webkit-touch-callout:default}
-@keyframes rise{from{opacity:0;transform:translateY(60px) scale(.9)}}
+.letter{position:fixed;inset:0;z-index:20;background:radial-gradient(120% 80% at 50% 40%,rgba(58,38,28,.9),rgba(12,8,5,.94));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:56px 16px calc(24px + env(safe-area-inset-bottom,0px));animation:fade .25s;overflow:hidden}
+.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:24px;line-height:42px;text-align:center;z-index:3}
+.stage{display:flex;flex-direction:column;align-items:center;gap:22px}
+.stage-title{font-family:var(--display);color:#fff;font-size:26px;margin:0;letter-spacing:.06em}
+/* 签筒 */
+.tube{position:relative;width:150px;height:300px;touch-action:none;user-select:none;-webkit-user-select:none;transform-origin:50% 90%;cursor:grab}
+.tube:focus-visible{outline:2px solid #fff;outline-offset:6px;border-radius:24px}
+.tube.shake{animation:shake .14s linear infinite alternate}
+@keyframes shake{from{transform:rotate(-9deg) translateX(-4px)}to{transform:rotate(9deg) translateX(4px)}}
+.sticks{position:absolute;left:18px;right:18px;top:0;height:140px}
+.sticks i{position:absolute;bottom:0;width:11px;height:var(--h);left:var(--x);border-radius:5px 5px 2px 2px;background:linear-gradient(90deg,#E9D8BD,#F7EBD7 45%,#DCC6A4);transform:rotate(var(--r));transform-origin:50% 100%;transition:transform .2s}
+.sticks i::before{content:"";position:absolute;top:0;left:0;right:0;height:18px;border-radius:5px 5px 0 0;background:var(--pink)}
+.tube.shake .sticks i{animation:jig .1s linear infinite alternate}
+.tube.shake .sticks i:nth-child(odd){animation-duration:.13s}
+.tube.shake .sticks i:nth-child(3n){animation-duration:.08s}
+@keyframes jig{to{transform:rotate(var(--r)) translateY(-10px)}}
+.tube-body{position:absolute;z-index:2;left:0;right:0;bottom:0;height:200px;border-radius:14px 14px 34px 34px;background:linear-gradient(90deg,#3A2A21 0%,#6B4A37 30%,#7D5842 45%,#5A3E2E 70%,#2E211A 100%);box-shadow:inset 0 10px 0 -4px rgba(0,0,0,.35),0 30px 40px -20px rgba(0,0,0,.8)}
+.tube-body::before,.tube-body::after{content:"";position:absolute;left:0;right:0;height:8px;background:rgba(0,0,0,.18)}
+.tube-body::before{top:34px}.tube-body::after{bottom:34px}
+.tube-label{position:absolute;left:50%;top:56px;transform:translateX(-50%);background:#F7F1EA;color:#3A2A21;writing-mode:vertical-rl;font-family:var(--display);font-size:22px;letter-spacing:.2em;padding:10px 7px;border-radius:6px;display:flex;align-items:center;gap:4px}
+.tube-label svg{width:16px;height:16px;fill:var(--pink)}
+.hint{color:#fff;opacity:.85;font-size:14px;margin:0;letter-spacing:.06em;min-height:1.6em;text-align:center}
+.meter{width:150px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--pink);transition:width .1s}
+/* the drawn stick */
+.drawn{position:absolute;left:50%;top:0;width:26px;height:230px;margin-left:-13px;border-radius:8px 8px 4px 4px;background:linear-gradient(90deg,#E9D8BD,#FBF1E0 45%,#DCC6A4);box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:1;display:flex;flex-direction:column;align-items:center;padding-top:34px;writing-mode:vertical-rl;font-size:15px;color:#5A3E2E;letter-spacing:.15em;font-weight:600;animation:popout .6s cubic-bezier(.2,1.4,.4,1) forwards;cursor:pointer;touch-action:none}
+.drawn::before{content:"";position:absolute;top:0;left:0;right:0;height:26px;border-radius:8px 8px 0 0;background:var(--pink)}
+@keyframes popout{from{transform:translateY(110px)}to{transform:translateY(-120px) rotate(4deg)}}
+.drawn.fly{animation:flyaway .45s ease-in forwards}
+@keyframes flyaway{from{transform:translateY(-120px) rotate(4deg)}to{transform:translateY(-110vh) rotate(-20deg);opacity:0}}
+.drawn:focus-visible{outline:2px solid #fff;outline-offset:4px}
+/* card */
+.result{display:flex;flex-direction:column;align-items:center;gap:14px;max-height:100%;min-height:0}
+.cardimg{display:block;max-width:min(360px,100%);max-height:calc(100vh - 220px);width:auto;height:auto;border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);animation:rise .6s cubic-bezier(.2,.8,.2,1);-webkit-touch-callout:default}
+@keyframes rise{from{opacity:0;transform:translateY(80px) rotate(-4deg) scale(.85)}}
 .save-hint{color:#fff;opacity:.75;font-size:13px;margin:0;letter-spacing:.04em}
-
+.again{height:46px;padding:0 26px;border-radius:23px;background:#F7F1EA;color:#3A2A21;font-size:15px;font-weight:600;letter-spacing:.06em}
+.again:active{transform:scale(.95)}
 @media (max-height:640px){.name h1{font-size:44px}.fact{font-size:16px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -111,8 +130,8 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
   <div class="photo" id="photo">
     <img src="xiaobao.jpg" alt="小宝：海豹色双色布偶猫，蓝眼睛，粉鼻子">
     <div class="topbar left">
-      <button class="round" id="openLetter" aria-label="今日小宝" style="position:relative">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+      <button class="round" id="openLetter" aria-label="抽一支小宝签" style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11h10l-1.2 9.2a1 1 0 0 1-1 .8H9.2a1 1 0 0 1-1-.8z"/><path d="M9.5 11 8 3M12 11V2.5M14.5 11 16 4"/></svg>
         <span class="newdot" id="newdot" hidden></span>
       </button>
     </div>
@@ -138,17 +157,23 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
   </section>
 </main>
 
-<div class="letter" id="letter" role="dialog" aria-label="今日小宝" hidden>
+<div class="letter" id="letter" role="dialog" aria-label="抽一支小宝签" hidden>
   <button class="close" id="closeLetter" aria-label="关闭">×</button>
-  <button class="env" id="env" aria-label="拆开小宝的信">
-    <span class="body"></span><span class="flap"></span>
-    <span class="seal"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="14" cy="6.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/></svg></span>
-  </button>
-  <p class="letter-label" id="letterLabel">小宝给你的信 · 点一下拆开</p>
-  <img class="cardimg" id="cardimg" alt="" hidden>
-  <p class="save-hint" id="saveHint" hidden>长按图片，保存或发给朋友</p>
+  <div class="stage" id="stage">
+    <p class="stage-title">小宝签</p>
+    <div class="tube" id="tube" role="button" tabindex="0" aria-label="按住签筒摇一摇">
+      <div class="sticks" id="sticks"></div>
+      <div class="tube-body"><span class="tube-label">小宝签<svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="14" cy="6.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/></svg></span></div>
+    </div>
+    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+    <p class="hint" id="hint">按住签筒摇一摇，或者晃晃手机</p>
+  </div>
+  <div class="result" id="result" hidden>
+    <img class="cardimg" id="cardimg" alt="">
+    <p class="save-hint">长按图片，保存或发给朋友</p>
+    <button class="again" id="again">再抽一支</button>
+  </div>
 </div>
-
 <div class="scrim" id="scrim" hidden>
   <div class="sheet" role="dialog" aria-label="我的收藏">
     <div class="grab"></div>
@@ -331,7 +356,7 @@ $("openFav").onclick=openFav;
 $("scrim").onclick=e=>{if(e.target===$("scrim"))$("scrim").hidden=true};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")$("scrim").hidden=true});
 
-/* today's letter */
+/* 小宝签 */
 const LINES=[
 "今天的计划：晒太阳，睡觉，被你摸。做完三件就是完美的一天。",
 "你出门的时候我没有在等你，我只是刚好睡在门口。",
@@ -394,14 +419,8 @@ const LINES=[
 "我不需要很多东西。一个你，一扇有阳光的窗，就够了。",
 "我不会看时间，但我知道你几点该回家。"
 ];
-function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-function todayIndex(date=new Date()){
-  const days=Math.floor((Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())-Date.UTC(2026,0,1))/864e5);
-  const n=LINES.length,cycle=Math.floor(days/n),pos=((days%n)+n)%n;
-  const order=[...Array(n).keys()],r=rng(20260925+cycle);
-  for(let i=n-1;i>0;i--){const j=Math.floor(r()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
-  return order[pos];
-}
+const CN="零一二三四五六七八九";
+const cnNum=n=>n<=10?(n===10?"十":CN[n]):n<20?"十"+CN[n%10]:CN[Math.floor(n/10)]+"十"+(n%10?CN[n%10]:"");
 const dateKey=(d=new Date())=>`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
 function wrapZh(ctx,text,maxW){
   const noStart="，。！？、：；）」』”…",lines=[];let line="";
@@ -410,24 +429,24 @@ function wrapZh(ctx,text,maxW){
   }
   if(line)lines.push(line);return lines;
 }
-function drawCard(){
+function drawCard(idx){
   const W=1080,H=1440,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
   const FONT='"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif';
   x.fillStyle="#FBF8F5";x.fillRect(0,0,W,H);
-  // arched photo
   const px=110,py=110,pw=W-220,ph=740,R=pw/2,br=44,img=document.querySelector("#photo img");
   x.save();x.beginPath();x.moveTo(px,py+R);x.arc(px+R,py+R,R,Math.PI,0);x.lineTo(px+pw,py+ph-br);
   x.quadraticCurveTo(px+pw,py+ph,px+pw-br,py+ph);x.lineTo(px+br,py+ph);x.quadraticCurveTo(px,py+ph,px,py+ph-br);x.closePath();x.clip();
   const s=Math.max(pw/img.naturalWidth,ph/img.naturalHeight),iw=img.naturalWidth*s,ih=img.naturalHeight*s;
   x.drawImage(img,px+(pw-iw)/2,py+(ph-ih)*0.28,iw,ih);x.restore();
-  // date
-  const d=new Date();x.textAlign="center";x.fillStyle="#9A8F88";x.font=`500 36px ${FONT}`;
-  x.fillText(`${d.getMonth()+1}月${d.getDate()}日 · 星期${"日一二三四五六"[d.getDay()]}`,W/2,py+ph+86);
-  // line
+  // stick-number badge on the photo
+  const label=`第${cnNum(idx+1)}签`;x.font=`600 34px ${FONT}`;const tw=x.measureText(label).width+56;
+  x.fillStyle="#E3919F";x.beginPath();x.roundRect?x.roundRect(W/2-tw/2,py+ph-34,tw,68,34):x.rect(W/2-tw/2,py+ph-34,tw,68);x.fill();
+  x.fillStyle="#fff";x.textAlign="center";x.fillText(label,W/2,py+ph+12);
+  const d=new Date();x.fillStyle="#9A8F88";x.font=`500 32px ${FONT}`;
+  x.fillText(`${d.getMonth()+1}月${d.getDate()}日 · 星期${"日一二三四五六"[d.getDay()]}`,W/2,py+ph+96);
   x.fillStyle="#2E221C";x.font=`600 58px ${FONT}`;
-  const lines=wrapZh(x,LINES[todayIndex()],W-260),lh=88,top=py+ph+130+(3-lines.length)*lh/2;
+  const lines=wrapZh(x,LINES[idx],W-260),lh=88,top=py+ph+136+(3-lines.length)*lh/2;
   lines.forEach((l,i)=>x.fillText(l,W/2,top+lh*(i+0.75)));
-  // signature + paw
   x.font=`500 38px ${FONT}`;x.fillStyle="#6E625B";x.fillText("—— 小宝",W/2-26,H-150);
   const cx=W/2+110,cy=H-164;x.fillStyle="#E3919F";
   x.beginPath();x.ellipse(cx,cy+8,16,13,0,0,7);x.fill();
@@ -435,25 +454,95 @@ function drawCard(){
   x.font=`400 26px ${FONT}`;x.fillStyle="#B4AAA3";x.fillText("sophiahuang19.github.io/xiaobao",W/2,H-70);
   return c.toDataURL("image/jpeg",.9);
 }
-function showCard(){
-  const img=document.querySelector("#photo img"),go=()=>{$("cardimg").src=drawCard();$("cardimg").hidden=false;$("saveHint").hidden=false;$("env").hidden=true;$("letterLabel").hidden=true};
+
+/* sticks in the tube */
+[[4,118,-7],[16,132,-3],[28,112,2],[40,138,-1],[52,120,5],[64,130,1],[76,114,7],[88,126,3],[34,100,-5],[70,104,6]]
+  .forEach(([xp,h,r])=>{const i=document.createElement("i");i.style.cssText=`--x:${xp}%;--h:${h}px;--r:${r}deg`;$("sticks").appendChild(i)});
+
+/* wooden clack sound */
+let ac=null;
+function clack(){
+  try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    const t=ac.currentTime,len=.05,buf=ac.createBuffer(1,ac.sampleRate*len,ac.sampleRate),d=buf.getChannelData(0);
+    for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,4);
+    const src=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();
+    f.type="bandpass";f.frequency.value=1400+Math.random()*1400;f.Q.value=4;g.gain.value=.5;
+    src.buffer=buf;src.connect(f).connect(g).connect(ac.destination);src.start(t);
+  }catch(e){}
+}
+
+const NEED=1400;let shaken=0,holding=false,last=0,raf=0,done=false,motionAsked=false,motionBurst=0;
+const hintText=["按住签筒摇一摇，或者晃晃手机","摇呀摇……","签在里面乱跳……","快出来了！"];
+function tick(now){
+  const dt=Math.min(now-last,50);last=now;
+  const active=holding||motionBurst>now;
+  $("tube").classList.toggle("shake",active);
+  if(active&&!done){
+    shaken+=dt;if(Math.random()<.35)clack();
+    if(navigator.vibrate&&Math.random()<.2)navigator.vibrate(15);
+    $("meter").style.width=Math.min(100,shaken/NEED*100)+"%";
+    $("hint").textContent=hintText[Math.min(3,1+Math.floor(shaken/NEED*3))];
+    if(shaken>=NEED){dropStick();return}
+  }
+  raf=requestAnimationFrame(tick);
+}
+function startLoop(){cancelAnimationFrame(raf);last=performance.now();raf=requestAnimationFrame(tick)}
+function askMotion(){
+  if(motionAsked)return;motionAsked=true;
+  const add=()=>window.addEventListener("devicemotion",onMotion);
+  if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==="function"){
+    DeviceMotionEvent.requestPermission().then(s=>{if(s==="granted")add()}).catch(()=>{});
+  }else add();
+}
+let prevA=null;
+function onMotion(e){
+  if($("letter").hidden||done)return;
+  const a=e.accelerationIncludingGravity||e.acceleration;if(!a||a.x==null)return;
+  if(prevA){const j=Math.abs(a.x-prevA.x)+Math.abs(a.y-prevA.y)+Math.abs(a.z-prevA.z);if(j>18)motionBurst=performance.now()+220}
+  prevA={x:a.x,y:a.y,z:a.z};
+}
+$("tube").addEventListener("pointerdown",e=>{if(done)return;e.preventDefault();askMotion();holding=true;$("tube").setPointerCapture?.(e.pointerId)});
+["pointerup","pointercancel","pointerleave"].forEach(ev=>$("tube").addEventListener(ev,()=>holding=false));
+$("tube").addEventListener("keydown",e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();holding=true}});
+$("tube").addEventListener("keyup",()=>holding=false);
+
+let picked=0;
+function pick(){
+  const drawn=new Set(store.get("xb-drawn",[]));
+  let pool=LINES.map((_,i)=>i).filter(i=>!drawn.has(i));
+  if(!pool.length){drawn.clear();pool=LINES.map((_,i)=>i)}
+  const i=pool[Math.floor(Math.random()*pool.length)];drawn.add(i);store.set("xb-drawn",[...drawn]);return i;
+}
+function dropStick(){
+  done=true;holding=false;$("tube").classList.remove("shake");clack();setTimeout(clack,90);
+  if(navigator.vibrate)navigator.vibrate([30,40,60]);
+  picked=pick();store.set("xb-draw-date",dateKey());$("newdot").hidden=true;
+  const s=document.createElement("button");s.className="drawn";s.id="drawn";s.textContent=`第${cnNum(picked+1)}签`;
+  s.setAttribute("aria-label",`第${picked+1}签，点一下拿出来`);
+  $("tube").appendChild(s);
+  $("hint").textContent="掉出来一支！点它，看看小宝说了什么";
+  s.onclick=e=>{e.stopPropagation();s.classList.add("fly");setTimeout(showResult,380)};
+  setTimeout(()=>s.focus({preventScroll:true}),600);
+}
+function showResult(){
+  const img=document.querySelector("#photo img"),go=()=>{
+    $("cardimg").src=drawCard(picked);$("cardimg").alt=`第${picked+1}签：${LINES[picked]}`;
+    $("stage").hidden=true;$("result").hidden=false;$("cardimg").style.animation="none";void $("cardimg").offsetWidth;$("cardimg").style.animation="";
+  };
   img.complete&&img.naturalWidth?go():img.addEventListener("load",go,{once:true});
 }
-function openLetter(){
-  $("letter").hidden=false;$("cardimg").hidden=true;$("saveHint").hidden=true;
-  const opened=store.get("xb-letter-date","")===dateKey();
-  $("env").classList.remove("open");$("env").hidden=opened;$("letterLabel").hidden=opened;
-  if(opened)showCard();
+function resetDraw(){
+  done=false;shaken=0;holding=false;$("drawn")?.remove();$("meter").style.width="0";
+  $("hint").textContent=hintText[0];$("stage").hidden=false;$("result").hidden=true;startLoop();
 }
-$("env").onclick=()=>{
-  $("env").classList.add("open");store.set("xb-letter-date",dateKey());$("newdot").hidden=true;
-  setTimeout(showCard,matchMedia("(prefers-reduced-motion:reduce)").matches?0:650);
-};
+function openLetter(){$("letter").hidden=false;resetDraw();setTimeout(()=>$("tube").focus({preventScroll:true}),50)}
+function closeLetter(){$("letter").hidden=true;cancelAnimationFrame(raf)}
+$("again").onclick=resetDraw;
 $("openLetter").onclick=openLetter;
-$("closeLetter").onclick=()=>$("letter").hidden=true;
-$("letter").addEventListener("click",e=>{if(e.target===$("letter"))$("letter").hidden=true});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")$("letter").hidden=true});
-$("newdot").hidden=store.get("xb-letter-date","")===dateKey();
+$("closeLetter").onclick=closeLetter;
+$("letter").addEventListener("click",e=>{if(e.target===$("letter"))closeLetter()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLetter()});
+$("newdot").hidden=store.get("xb-draw-date","")===dateKey();
 
 seen.add(cur);render();
 </script>
