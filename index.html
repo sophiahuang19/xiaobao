@@ -36,10 +36,10 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .photo.pat img{transform:scale(1.03)}
 .photo::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(to top,rgba(20,12,8,.7),rgba(20,12,8,0));pointer-events:none}
-.name{position:absolute;left:22px;bottom:18px;z-index:2;color:#fff;pointer-events:none}
+.name{position:absolute;left:22px;bottom:calc(70px * var(--s) + 14px);z-index:2;color:#fff;pointer-events:none}
 .name h1{font-family:var(--display);font-weight:600;font-size:52px;line-height:1;margin:0;letter-spacing:.02em;text-shadow:0 2px 12px rgba(0,0,0,.25)}
 .name p{margin:6px 0 0;font-size:13px;opacity:.85;letter-spacing:.04em}
-.pethint{position:absolute;right:16px;bottom:20px;z-index:2;color:#fff;font-size:12px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none;transition:opacity .4s}
+.pethint{position:absolute;right:16px;bottom:calc(70px * var(--s) + 16px);z-index:2;color:#fff;font-size:12px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none;transition:opacity .4s}
 .heart{position:absolute;z-index:4;pointer-events:none;color:#fff;font-size:26px;text-shadow:0 2px 8px rgba(227,145,159,.9);animation:float 1.2s ease-out forwards}
 @keyframes float{from{opacity:1;transform:translate(-50%,-50%) scale(.6)}to{opacity:0;transform:translate(-50%,-150px) scale(1.4) rotate(var(--r))}}
 .bubble{position:absolute;left:50%;top:18px;transform:translateX(-50%);z-index:3;background:#fff;color:#2E221C;font-size:14px;padding:8px 16px;border-radius:18px;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.35);animation:pop .3s ease}
