@@ -157,11 +157,11 @@ function wrapZh(ctx,text,maxW){
   }
   if(line)lines.push(line);return lines;
 }
-function drawCard(idx){
+function drawCard(idx,img){
   const W=1080,H=1440,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
   const FONT='"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif';
   x.fillStyle="#FBF8F5";x.fillRect(0,0,W,H);
-  const px=110,py=110,pw=W-220,ph=740,R=pw/2,br=44,img=document.querySelector("#photo img");
+  const px=110,py=110,pw=W-220,ph=740,R=pw/2,br=44;
   x.save();x.beginPath();x.moveTo(px,py+R);x.arc(px+R,py+R,R,Math.PI,0);x.lineTo(px+pw,py+ph-br);
   x.quadraticCurveTo(px+pw,py+ph,px+pw-br,py+ph);x.lineTo(px+br,py+ph);x.quadraticCurveTo(px,py+ph,px,py+ph-br);x.closePath();x.clip();
   const s=Math.max(pw/img.naturalWidth,ph/img.naturalHeight),iw=img.naturalWidth*s,ih=img.naturalHeight*s;
@@ -197,7 +197,7 @@ function clack(){
 }
 /* The portrait is a small living scene, rather than a mood selector. */
 let pats=0,bt,idleTimer,playTimer,lastPet=-Infinity;
-let done=false,picked=0;
+let done=false,picked=0,cardMood="happy",lastCardMood=store.get("xb-last-card-mood",null);
 const reduced=matchMedia("(prefers-reduced-motion: reduce)");
 function say(text){
   $("cat-message").textContent=text;
@@ -210,7 +210,10 @@ function restLater(){clearTimeout(idleTimer);idleTimer=setTimeout(async()=>{
   await setMood("sleepy");say("你忙你的，我先眯一小会儿。");
 },22000)}
 function offerNote(){
-  if(done)return;done=true;picked=pick();clack();$("secret-note").hidden=false;
+  if(done)return;done=true;picked=pick();
+  const pool=Object.keys(moods).filter(key=>key!==lastCardMood);
+  cardMood=pool[Math.floor(Math.random()*pool.length)];
+  clack();$("secret-note").hidden=false;
   $("draw-button").textContent="接住小宝的悄悄话 ↗";
   $("hint").textContent="它把一张纸条压在爪爪下面。";
 }
@@ -257,9 +260,10 @@ let resultBusy=false;
 async function showResult(){
   if(resultBusy)return;resultBusy=true;
   try{
-    const img=$("cat-image");await img.decode();
-    const data=drawCard(picked);$("cardimg").src=data;$("download").href=data;
-    $("cardimg").alt=`第${picked+1}签：${LINES[picked]}`;
+    const img=new Image();img.src=moods[cardMood].src;await img.decode();
+    const data=drawCard(picked,img);
+    lastCardMood=cardMood;store.set("xb-last-card-mood",cardMood);$("cardimg").src=data;$("download").href=data;
+    $("cardimg").alt=`${moods[cardMood].alt}。第${picked+1}签：${LINES[picked]}`;
     if(!$("result").open)$("result").showModal();
   }catch(error){$("hint").textContent="图片还没准备好，再点一次试试。"}
   finally{resultBusy=false}
