@@ -11,20 +11,17 @@
 <title>小宝</title>
 <style>
 :root{
-  --ground:#E9EDF2; --sheet:#FFFFFF; --ink:#2E221C; --muted:#8A7F78; --line:#E6E2DE;
-  --blue:#4A6FA5; --pink:#E3919F; --pink-soft:#FBEAED; --btn:#2E221C; --btn-ink:#FFFFFF;
+  --ground:#E9EDF2; --ink:#2E221C; --muted:#8A7F78;
+  --blue:#4A6FA5; --pink:#E3919F;
   --display:"PingFang SC","Hiragino Sans GB",sans-serif;
   --body:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --s:.72;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  color-scheme:dark;
-  --ground:#0F0C0A; --sheet:#1E1814; --ink:#F3ECE6; --muted:#A3978F; --line:#352C26;
-  --blue:#93B4E6; --pink:#F0A6B3; --pink-soft:#3A262A; --btn:#F3ECE6; --btn-ink:#1E1814;
+  color-scheme:dark; --ground:#0F0C0A; --ink:#F3ECE6; --muted:#A3978F; --blue:#93B4E6; --pink:#F0A6B3;
 }}
 :root[data-theme="dark"]{
-  color-scheme:dark;
-  --ground:#0F0C0A; --sheet:#1E1814; --ink:#F3ECE6; --muted:#A3978F; --line:#352C26;
-  --blue:#93B4E6; --pink:#F0A6B3; --pink-soft:#3A262A; --btn:#F3ECE6; --btn-ink:#1E1814;
+  color-scheme:dark; --ground:#0F0C0A; --ink:#F3ECE6; --muted:#A3978F; --blue:#93B4E6; --pink:#F0A6B3;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
@@ -32,96 +29,63 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);padding:0
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 
-.app{position:relative;width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;padding-block:12px 16px;gap:12px}
+.app{width:100%;max-width:440px;height:100%;display:flex;flex-direction:column;padding-block:12px 14px}
 
-/* photo — the star */
-.photo{position:relative;flex:1 1 auto;min-height:0;border-radius:32px;overflow:hidden;background:#3A2A21;box-shadow:0 24px 50px -30px rgba(40,25,15,.7)}
+/* 小宝 */
+.photo{position:relative;flex:1 1 auto;min-height:0;border-radius:32px;overflow:hidden;background:#3A2A21;box-shadow:0 24px 50px -30px rgba(40,25,15,.7);cursor:pointer}
 .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .photo.pat img{transform:scale(1.03)}
-.photo::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(to top,rgba(20,12,8,.72),rgba(20,12,8,0));pointer-events:none}
+.photo::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(to top,rgba(20,12,8,.7),rgba(20,12,8,0));pointer-events:none}
 .name{position:absolute;left:22px;bottom:18px;z-index:2;color:#fff;pointer-events:none}
-.name h1{font-family:var(--display);font-weight:600;font-size:56px;line-height:1;margin:0;letter-spacing:.02em;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.name h1{font-family:var(--display);font-weight:600;font-size:52px;line-height:1;margin:0;letter-spacing:.02em;text-shadow:0 2px 12px rgba(0,0,0,.25)}
 .name p{margin:6px 0 0;font-size:13px;opacity:.85;letter-spacing:.04em}
-.pethint{position:absolute;right:16px;bottom:22px;z-index:2;color:#fff;font-size:12px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none;transition:opacity .4s}
-.topbar{position:absolute;top:14px;right:14px;z-index:3}
-.round{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
-.round svg{width:20px;height:20px}
-.round .badge{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;border-radius:9px;background:var(--pink);color:#fff;font-size:11px;line-height:18px;text-align:center;padding:0 4px}
+.pethint{position:absolute;right:16px;bottom:20px;z-index:2;color:#fff;font-size:12px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none;transition:opacity .4s}
 .heart{position:absolute;z-index:4;pointer-events:none;color:#fff;font-size:26px;text-shadow:0 2px 8px rgba(227,145,159,.9);animation:float 1.2s ease-out forwards}
 @keyframes float{from{opacity:1;transform:translate(-50%,-50%) scale(.6)}to{opacity:0;transform:translate(-50%,-150px) scale(1.4) rotate(var(--r))}}
-.bubble{position:absolute;left:50%;top:18px;transform:translateX(-50%);z-index:3;background:var(--sheet);color:var(--ink);font-size:14px;padding:8px 16px;border-radius:18px;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.35);animation:pop .3s ease}
+.bubble{position:absolute;left:50%;top:18px;transform:translateX(-50%);z-index:3;background:#fff;color:#2E221C;font-size:14px;padding:8px 16px;border-radius:18px;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.35);animation:pop .3s ease}
 @keyframes pop{from{opacity:0;transform:translate(-50%,-6px)}to{opacity:1;transform:translate(-50%,0)}}
 
-/* fact card */
-.card{flex:0 0 auto;background:var(--sheet);border-radius:28px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:14px;touch-action:pan-y;user-select:none}
-.kicker{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);letter-spacing:.06em}
-.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--pink)}
-.fact{margin:0;font-size:17px;line-height:1.75;min-height:calc(1.75em * 4);transition:opacity .22s,transform .22s}
-.fact.out{opacity:0;transform:translateX(var(--dx,-16px))}
-.row{display:flex;align-items:center;gap:10px}
-.fav{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);color:var(--muted);flex:0 0 auto;transition:transform .15s}
-.fav svg{width:22px;height:22px}
-.fav[aria-pressed="true"]{color:var(--pink);border-color:var(--pink);background:var(--pink-soft)}
-.fav[aria-pressed="true"] svg path{fill:currentColor}
-.fav:active,.next:active{transform:scale(.94)}
-.next{flex:1;height:52px;border-radius:26px;background:var(--btn);color:var(--btn-ink);font-size:16px;font-weight:500;letter-spacing:.04em;transition:transform .15s}
-.swipe{font-size:11px;color:var(--muted);text-align:center;margin:0;opacity:.8}
-
-/* favorites sheet */
-.scrim{position:fixed;inset:0;background:rgba(10,6,4,.45);z-index:10;display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
-@keyframes fade{from{opacity:0}}
-.sheet{width:100%;max-width:440px;max-height:75%;background:var(--sheet);border-radius:28px 28px 0 0;padding:10px 20px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;animation:up .28s cubic-bezier(.2,.8,.2,1)}
-@keyframes up{from{transform:translateY(40px);opacity:.4}}
-.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 14px}
-.sheet h2{font-family:var(--display);font-weight:600;font-size:24px;margin:0 0 12px}
-.list{overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
-.item{font-size:15px;line-height:1.7;padding:14px 16px;border-radius:18px;background:var(--ground);display:flex;gap:10px;align-items:flex-start;text-align:left}
-.item span{flex:1}
-.item .x{color:var(--pink);font-size:18px;line-height:1.5}
-.empty{color:var(--muted);font-size:14px;text-align:center;padding:28px 0}
-
-/* 小宝签 */
-.topbar.left{left:14px;right:auto}
-.round .newdot{position:absolute;top:1px;right:1px;width:11px;height:11px;border-radius:50%;background:var(--pink);border:2px solid #fff}
-.letter{position:fixed;inset:0;z-index:20;background:radial-gradient(120% 80% at 50% 45%,#4A3326,#140E0A);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:56px 16px calc(24px + env(safe-area-inset-bottom,0px));animation:fade .25s;overflow:hidden}
-.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:24px;line-height:42px;text-align:center;z-index:3}
-.stage{display:flex;flex-direction:column;align-items:center;gap:22px;padding-top:110px}
-.stage-title{font-family:var(--display);color:#fff;font-size:26px;margin:0;letter-spacing:.06em}
 /* 签筒 */
-.tube{position:relative;width:150px;height:300px;touch-action:none;user-select:none;-webkit-user-select:none;transform-origin:50% 90%;cursor:grab}
-.tube:focus-visible{outline:2px solid #fff;outline-offset:6px;border-radius:24px}
-.tube.shake{animation:shake .14s linear infinite alternate}
+.draw{position:relative;z-index:5;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:calc(-70px * var(--s))}
+.tube-box{width:calc(150px * var(--s));height:calc(300px * var(--s))}
+.tube{position:relative;width:150px;height:300px;transform:scale(var(--s));transform-origin:0 0;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab}
+.tube:focus-visible{outline:3px solid var(--blue);outline-offset:8px;border-radius:24px}
+.tube .rock{position:absolute;inset:0;transform-origin:50% 90%}
+.tube.shake .rock{animation:shake .14s linear infinite alternate}
 @keyframes shake{from{transform:rotate(-9deg) translateX(-4px)}to{transform:rotate(9deg) translateX(4px)}}
 .sticks{position:absolute;left:18px;right:18px;top:0;height:140px}
-.sticks i{position:absolute;bottom:0;width:11px;height:var(--h);left:var(--x);border-radius:5px 5px 2px 2px;background:linear-gradient(90deg,#E9D8BD,#F7EBD7 45%,#DCC6A4);transform:rotate(var(--r));transform-origin:50% 100%;transition:transform .2s}
-.sticks i::before{content:"";position:absolute;top:0;left:0;right:0;height:18px;border-radius:5px 5px 0 0;background:var(--pink)}
+.sticks i{position:absolute;bottom:0;width:11px;height:var(--h);left:var(--x);border-radius:5px 5px 2px 2px;background:linear-gradient(90deg,#E9D8BD,#F7EBD7 45%,#DCC6A4);transform:rotate(var(--r));transform-origin:50% 100%;box-shadow:0 0 0 1px rgba(90,62,46,.12)}
+.sticks i::before{content:"";position:absolute;top:0;left:0;right:0;height:18px;border-radius:5px 5px 0 0;background:#E3919F}
 .tube.shake .sticks i{animation:jig .1s linear infinite alternate}
 .tube.shake .sticks i:nth-child(odd){animation-duration:.13s}
 .tube.shake .sticks i:nth-child(3n){animation-duration:.08s}
 @keyframes jig{to{transform:rotate(var(--r)) translateY(-10px)}}
-.tube-body{position:absolute;z-index:2;left:0;right:0;bottom:0;height:200px;border-radius:14px 14px 34px 34px;background:linear-gradient(90deg,#3A2A21 0%,#6B4A37 30%,#7D5842 45%,#5A3E2E 70%,#2E211A 100%);box-shadow:inset 0 10px 0 -4px rgba(0,0,0,.35),0 30px 40px -20px rgba(0,0,0,.8)}
+.tube-body{position:absolute;z-index:2;left:0;right:0;bottom:0;height:200px;border-radius:14px 14px 34px 34px;background:linear-gradient(90deg,#3A2A21 0%,#6B4A37 30%,#7D5842 45%,#5A3E2E 70%,#2E211A 100%);box-shadow:inset 0 10px 0 -4px rgba(0,0,0,.35),0 26px 30px -18px rgba(40,25,15,.7)}
 .tube-body::before,.tube-body::after{content:"";position:absolute;left:0;right:0;height:8px;background:rgba(0,0,0,.18)}
 .tube-body::before{top:34px}.tube-body::after{bottom:34px}
 .tube-label{position:absolute;left:50%;top:56px;transform:translateX(-50%);background:#F7F1EA;color:#3A2A21;writing-mode:vertical-rl;font-family:var(--display);font-size:22px;letter-spacing:.2em;padding:10px 7px;border-radius:6px;display:flex;align-items:center;gap:4px}
-.tube-label svg{width:16px;height:16px;fill:var(--pink)}
-.hint{color:#fff;opacity:.85;font-size:14px;margin:0;letter-spacing:.06em;min-height:1.6em;text-align:center}
-.meter{width:150px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);overflow:hidden}
-.meter i{display:block;height:100%;width:0;background:var(--pink);transition:width .1s}
-/* the drawn stick */
-.drawn{position:absolute;left:50%;top:0;width:26px;height:230px;margin-left:-13px;border-radius:8px 8px 4px 4px;background:linear-gradient(90deg,#E9D8BD,#FBF1E0 45%,#DCC6A4);box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:1;display:flex;flex-direction:column;align-items:center;padding-top:34px;writing-mode:vertical-rl;font-size:15px;color:#5A3E2E;letter-spacing:.15em;font-weight:600;animation:popout .6s cubic-bezier(.2,1.4,.4,1) forwards;cursor:pointer;touch-action:none}
-.drawn::before{content:"";position:absolute;top:0;left:0;right:0;height:26px;border-radius:8px 8px 0 0;background:var(--pink)}
-@keyframes popout{from{transform:translateY(110px)}to{transform:translateY(-120px) rotate(4deg)}}
+.tube-label svg{width:16px;height:16px;fill:#E3919F}
+.drawn{position:absolute;left:50%;top:0;width:26px;height:230px;margin-left:-13px;border-radius:8px 8px 4px 4px;background:linear-gradient(90deg,#E9D8BD,#FBF1E0 45%,#DCC6A4);box-shadow:0 10px 30px rgba(0,0,0,.4);z-index:1;display:flex;flex-direction:column;align-items:center;padding-top:34px;writing-mode:vertical-rl;font-size:15px;color:#5A3E2E;letter-spacing:.15em;font-weight:600;animation:popout .6s cubic-bezier(.2,1.4,.4,1) forwards}
+.drawn::before{content:"";position:absolute;top:0;left:0;right:0;height:26px;border-radius:8px 8px 0 0;background:#E3919F}
+@keyframes popout{from{transform:translateY(110px)}to{transform:translateY(-130px) rotate(4deg)}}
 .drawn.fly{animation:flyaway .45s ease-in forwards}
-@keyframes flyaway{from{transform:translateY(-120px) rotate(4deg)}to{transform:translateY(-110vh) rotate(-20deg);opacity:0}}
-.drawn:focus-visible{outline:2px solid #fff;outline-offset:4px}
-/* card */
-.result{display:flex;flex-direction:column;align-items:center;gap:14px;max-height:100%;min-height:0}
-.cardimg{display:block;max-width:min(360px,100%);max-height:calc(100vh - 220px);width:auto;height:auto;border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);animation:rise .6s cubic-bezier(.2,.8,.2,1);-webkit-touch-callout:default}
+@keyframes flyaway{from{transform:translateY(-130px) rotate(4deg)}to{transform:translateY(-110vh) rotate(-20deg);opacity:0}}
+.drawn:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.hint{margin:0;font-size:14px;color:var(--muted);letter-spacing:.06em;min-height:1.5em;text-align:center}
+.hint b{color:var(--pink);font-weight:500}
+
+/* 签卡 */
+.result{position:fixed;inset:0;z-index:20;background:radial-gradient(120% 80% at 50% 45%,#4A3326,#140E0A);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:60px 16px calc(24px + env(safe-area-inset-bottom,0px));animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:24px;line-height:42px;text-align:center}
+.cardimg{display:block;max-width:min(360px,100%);max-height:calc(100% - 110px);width:auto;height:auto;border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);animation:rise .6s cubic-bezier(.2,.8,.2,1);-webkit-touch-callout:default}
 @keyframes rise{from{opacity:0;transform:translateY(80px) rotate(-4deg) scale(.85)}}
 .save-hint{color:#fff;opacity:.75;font-size:13px;margin:0;letter-spacing:.04em}
-.again{height:46px;padding:0 26px;border-radius:23px;background:#F7F1EA;color:#3A2A21;font-size:15px;font-weight:600;letter-spacing:.06em}
+.again{height:46px;padding:0 28px;border-radius:23px;background:#F7F1EA;color:#3A2A21;font-size:15px;font-weight:600;letter-spacing:.06em}
 .again:active{transform:scale(.95)}
-@media (max-height:640px){.name h1{font-size:44px}.fact{font-size:16px}}
+
+@media (max-height:700px){:root{--s:.6}.name h1{font-size:42px}}
+@media (max-height:600px){:root{--s:.5}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -129,233 +93,35 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 <main class="app">
   <div class="photo" id="photo">
     <img src="xiaobao.jpg" alt="小宝：海豹色双色布偶猫，蓝眼睛，粉鼻子">
-    <div class="topbar left">
-      <button class="round" id="openLetter" aria-label="抽一支小宝签" style="position:relative">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11h10l-1.2 9.2a1 1 0 0 1-1 .8H9.2a1 1 0 0 1-1-.8z"/><path d="M9.5 11 8 3M12 11V2.5M14.5 11 16 4"/></svg>
-        <span class="newdot" id="newdot" hidden></span>
-      </button>
-    </div>
-    <div class="topbar">
-      <button class="round" id="openFav" aria-label="我的收藏" style="position:relative">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="currentColor"/></svg>
-        <span class="badge" id="favN" hidden>0</span>
-      </button>
-    </div>
     <div class="name"><h1>小宝</h1><p>海豹色双色布偶 · 蓝眼睛</p></div>
     <div class="pethint" id="pethint">摸摸我</div>
   </div>
 
-  <section class="card" id="card" aria-live="polite">
-    <div class="kicker"><span class="dot"></span><span id="cat">你知道吗</span></div>
-    <p class="fact" id="fact"></p>
-    <div class="row">
-      <button class="fav" id="fav" aria-pressed="false" aria-label="收藏这条">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
-      </button>
-      <button class="next" id="next">再告诉我一个</button>
+  <section class="draw">
+    <div class="tube-box">
+      <div class="tube" id="tube" role="button" tabindex="0" aria-label="按住签筒摇一摇，抽一支小宝签">
+        <div class="rock">
+          <div class="sticks" id="sticks"></div>
+          <div class="tube-body"><span class="tube-label">小宝签<svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="14" cy="6.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/></svg></span></div>
+        </div>
+      </div>
     </div>
+    <p class="hint" id="hint" aria-live="polite">按住签筒，摇一摇</p>
   </section>
 </main>
 
-<div class="letter" id="letter" role="dialog" aria-label="抽一支小宝签" hidden>
-  <button class="close" id="closeLetter" aria-label="关闭">×</button>
-  <div class="stage" id="stage">
-    <div class="tube" id="tube" role="button" tabindex="0" aria-label="按住签筒摇一摇">
-      <div class="sticks" id="sticks"></div>
-      <div class="tube-body"><span class="tube-label">小宝签<svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="14" cy="6.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/></svg></span></div>
-    </div>
-    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
-    <p class="hint" id="hint">按住签筒摇一摇，或者晃晃手机</p>
-  </div>
-  <div class="result" id="result" hidden>
-    <img class="cardimg" id="cardimg" alt="">
-    <p class="save-hint">长按图片，保存或发给朋友</p>
-    <button class="again" id="again">再抽一支</button>
-  </div>
-</div>
-<div class="scrim" id="scrim" hidden>
-  <div class="sheet" role="dialog" aria-label="我的收藏">
-    <div class="grab"></div>
-    <h2>收藏的小秘密</h2>
-    <div class="list" id="list"></div>
-  </div>
+<div class="result" id="result" role="dialog" aria-label="小宝签" hidden>
+  <button class="close" id="close" aria-label="关闭">×</button>
+  <img class="cardimg" id="cardimg" alt="">
+  <p class="save-hint">长按图片，保存或发给朋友</p>
+  <button class="again" id="again">再抽一支</button>
 </div>
 
 <script>
-const LABELS=["关于小宝的样子","小宝的家族","小宝的身体","小宝的小心思","照顾小宝"];
-const F=[
-// 0 小宝的长相
-[0,"小宝是「海豹色双色」布偶（Seal Bicolor）：深棕色的“海豹色”加上大面积白色，是布偶最经典的配色之一。"],
-[0,"小宝脸上那个白色的倒 V，是双色布偶的招牌。品种标准里最理想的倒 V 要对称、不越过眼睛外缘——小宝的 V 从额头一路劈到鼻子，相当标准。"],
-[0,"小宝的蓝眼睛里其实没有蓝色色素。虹膜缺少黑色素，光线在里面散射后才呈现蓝色，原理和天空看起来是蓝的有点像。"],
-[0,"所有布偶猫都是蓝眼睛——这是品种标准里的硬性要求。别的颜色的眼睛，就不算标准布偶了。"],
-[0,"小宝耳朵、脸颊和尾巴上的深棕色叫“重点色”。它来自一种对温度敏感的色素酶：身体越凉的部位，颜色越深。"],
-[0,"所以布偶宝宝刚出生时几乎是全白的，重点色要在几周里慢慢冒出来。小宝小时候大概也是一团白毛球。"],
-[0,"布偶的颜色要到 2 岁左右、有的甚至 3 岁才完全定型。小宝现在的样子，是慢慢“显影”出来的。"],
-[0,"同样因为那个温度敏感的酶，天冷时小宝的深色部分可能会稍微变深，天热时会浅一点。"],
-[0,"小宝粉粉的鼻头是双色布偶的特征。重点色布偶的鼻头通常是深色的，双色布偶则是粉色的。"],
-[0,"小宝胸前那一大片蓬松白毛叫“围兜”（bib）。布偶的围兜通常是全身最长最厚的毛。"],
-[0,"双色布偶的背上会有一块颜色较浅的“马鞍”，肚子是白的。小宝身侧那块浅棕色，就是马鞍的一部分。"],
-[0,"小宝的耳朵不是尖尖竖起的那种：布偶标准要求耳朵中等大小、耳根宽、耳尖圆，稍微往前倾。"],
-[0,"布偶的脸是宽宽的楔形，脸颊饱满，所以小宝看起来总是一副很有福气的样子。"],
-[0,"小宝照片里那些长长的白胡子，每一根根部都连着密集的神经，能感觉到非常细微的气流变化。"],
-[0,"猫的上唇两侧通常各有 12 根左右的胡须，排成 4 排。它们可以前后移动，小宝好奇时胡子会往前伸。"],
-[0,"小宝的胡须展开的宽度大约和它身体一样宽，是它判断“这个缝钻不钻得过去”的测距仪。"],
-[0,"布偶的毛是丝滑的半长毛，底绒比较少，所以比波斯猫之类不容易打结。"],
-[0,"双色布偶的四只脚通常是白色的，白脚下面的肉垫一般是粉色的。可以翻开小宝的脚掌看看。"],
-[0,"布偶是大体型猫：公猫常见 6–9 公斤，母猫约 4.5–7 公斤。小宝抱起来沉甸甸的，是正常的。"],
-[0,"布偶是晚熟品种，要 3–4 岁才完全长成。小宝可能还在悄悄“长个子”。"],
-// 1 布偶血统
-[1,"布偶猫起源于 1960 年代的美国加州，由一位叫 Ann Baker 的繁育者培育出来。"],
-[1,"布偶家族的“始祖母”是一只叫 Josephine 的白色长毛猫。算起来，小宝是她的后代。"],
-[1,"Ragdoll 这个名字来自布偶被抱起来时整只猫放松瘫软、像个布娃娃一样。"],
-[1,"布偶有四种花纹类型：重点色、手套、双色、梵（Van）。小宝属于双色。"],
-[1,"布偶的颜色有海豹色、蓝色、巧克力色、丁香色、红色、奶油色等。小宝的海豹色是最经典、最常见的一种。"],
-[1,"双色和“梵”的区别：梵色布偶的深色只剩耳朵、头顶一点点和尾巴，身上几乎全白；小宝身上还有马鞍，所以是双色。"],
-[1,"布偶常年排在世界上最受欢迎猫品种的前列，在美国 CFA 的年度榜单上多次登顶。"],
-[1,"布偶常被叫作“小狗猫”：会跟着主人从一个房间走到另一个房间，听到开门声会跑去迎接。"],
-[1,"不少布偶能学会叼玩具回来（fetch）。可以拿个小纸团和小宝试试。"],
-[1,"和很多爱登高的猫不同，布偶更喜欢待在地面附近——沙发、地毯、你的脚边。"],
-[1,"布偶的叫声通常比较轻柔，不太会扯着嗓子叫。"],
-[1,"布偶性格温和、防御心弱，被认为特别适合当纯室内猫。"],
-[1,"布偶有个“表亲”品种叫 Ragamuffin，是从早期布偶分出去的，允许更多的颜色和花纹。"],
-[1,"布偶的平均寿命大约在 12 到 17 岁之间，照顾得好的活到 20 岁也不稀奇。"],
-[1,"没有真正“不过敏”的猫：过敏原主要来自猫唾液和皮脂腺里的蛋白 Fel d 1，布偶也一样会有。"],
-[1,"布偶品种里已知有一种和肥厚型心肌病（HCM）相关的基因突变，所以定期做心脏检查对小宝很值得。"],
-// 2 身体秘密
-[2,"小宝的正常体温大约在 38–39°C，比人高一度多。摸起来暖乎乎的不是错觉。"],
-[2,"猫的心跳每分钟大约 140–220 次，大约是人的两倍。"],
-[2,"猫每天会睡 12–16 个小时。如果小宝每天睡 14 小时，活到 15 岁时，它有将近 9 年在睡觉。"],
-[2,"每只猫耳朵里有 30 多块肌肉，能让耳朵单独转动差不多 180 度。小宝可以一只耳朵听你，一只耳朵听门外。"],
-[2,"猫能听到大约 64 kHz 的高频声音，人类大约只到 20 kHz。小宝突然盯着墙，可能是听到了你听不见的东西。"],
-[2,"猫尝不出甜味：它们缺少一个能正常工作的甜味受体基因。小宝对蛋糕感兴趣，多半只是好奇或者闻到了奶油味。"],
-[2,"猫的鼻纹就像人的指纹一样独一无二。小宝粉鼻头上的纹路，全世界只有这一份。"],
-[2,"猫主要靠脚掌肉垫出汗。天很热或者紧张时，小宝可能会在地板上留下小小的湿脚印。"],
-[2,"猫有第三眼睑（瞬膜），在眼角里面。小宝睡得迷糊时，偶尔能看到眼角一层白膜。"],
-[2,"猫在昏暗环境里只需要人类大约六分之一的光就能看清。"],
-[2,"猫的视野大约有 200 度，比人类的 180 度左右更宽。"],
-[2,"猫看不太清眼前很近的东西。小宝凑过来闻你手指时，其实更多是靠鼻子和胡须在“看”。"],
-[2,"猫的舌头上长满朝后的小倒钩（丝状乳头），是一把随身携带的梳子。被小宝舔会有点刺刺的，就是这个原因。"],
-[2,"成年猫一共有 30 颗牙。"],
-[2,"猫的锁骨是“浮动”的，不和其他骨头硬连在一起，所以头能钻过去的地方，身体基本也能过。"],
-[2,"猫是用脚趾走路的“趾行动物”，小宝的脚后跟其实在腿的中间位置，就是往后弯的那个关节。"],
-[2,"大多数猫前脚有 5 个趾头，后脚只有 4 个。"],
-[2,"猫喝水时舌尖轻点水面，把一小柱水往上拉，在它落下前闭嘴接住，每秒大约 4 次。"],
-[2,"猫嘴巴上方有一个叫犁鼻器的嗅觉器官。小宝闻到奇怪的东西后张着嘴“发呆”，就是在用它仔细分析气味。"],
-[2,"猫的嗅觉比人灵敏得多，嗅觉细胞数量是人类的好几十倍。"],
-[2,"猫的尾巴里有大约 20 块骨头，差不多占全身骨头的十分之一。"],
-[2,"猫的前腿背面、手腕附近也长着几根胡须，帮它们在抓东西时感知猎物的动静。"],
-[2,"猫的祖先生活在沙漠边缘，肾脏很会浓缩尿液，所以猫天生不太爱喝水。多给小宝吃湿粮是补水的好办法。"],
-[2,"猫的呼噜声频率大约在 25–150 Hz。有研究推测这个频段可能和骨骼、组织的修复有关，不过还没有定论。"],
-[2,"猫睡觉时也有快速眼动（REM）期。小宝睡着时胡子抽动、爪子乱蹬，可能正在做梦。"],
-// 3 读懂小宝
-[3,"对小宝慢慢地眨眨眼，是猫语里的“我很放松，我信任你”。研究发现猫也会用慢眨眼回应人。"],
-[3,"小宝竖着尾巴朝你走过来，是友好的打招呼。尾巴尖弯成一个小钩，心情就更好了。"],
-[3,"小宝用脸蹭你，是在用脸颊上的气味腺把你标记成“我的”。"],
-[3,"小宝用头顶你（head bunt），是猫之间表示亲近的动作，也是一种气味交换。"],
-[3,"小宝在你身上踩奶，是小时候吃奶时留下的习惯，通常说明它此刻非常安心。"],
-[3,"小宝翻出肚子给你看，是很大的信任。但这不一定是邀请你摸肚子——很多猫会立刻抱住你的手。"],
-[3,"成年猫之间几乎不互相喵喵叫，“喵”主要是说给人听的。小宝喵你，是专门在跟你讲话。"],
-[3,"研究发现，猫能从一串名字里分辨出自己的名字。小宝知道“小宝”是在叫它，只是回不回应看心情。"],
-[3,"猫能从陌生人的声音里认出主人的声音。小宝可能懒得起身，但耳朵已经转向你了。"],
-[3,"和狗不同，猫快速甩尾巴通常代表烦躁或兴奋过头，是“别再摸了”的信号。"],
-[3,"耳朵往两边压平成“飞机耳”，说明小宝紧张或不高兴了。"],
-[3,"呼噜不一定代表开心。猫在生病、紧张的时候也会呼噜，用来安抚自己。"],
-[3,"猫是晨昏性动物，黎明和黄昏最活跃。小宝傍晚突然满屋子跑酷，是天性在发作。"],
-[3,"猫清醒时有相当一部分时间都在理毛。小宝舔毛不只是爱干净，也是在给自己降温和减压。"],
-[3,"猫钻纸箱不是没理由的：有研究发现，给收容所的猫一个箱子，它们适应新环境的压力会小很多。"],
-[3,"小宝看着窗外的小鸟发出“咔咔咔”的声音，是一种兴奋又抓不到的狩猎反应。"],
-[3,"大约一半到三分之二的猫会对猫薄荷有反应，这是由基因决定的。小宝如果没反应，可以试试木天蓼。"],
-[3,"小宝把玩具叼到你面前，可能是在跟你分享“猎物”，也可能是邀请你陪它玩。"],
-[3,"小宝背对着你坐，其实是信任：它把看不到的方向交给了你。"],
-[3,"猫偶尔吃点草，可能是在帮助排出肚子里的毛球。"],
-[3,"猫盯着你然后慢慢闭上眼睛睡着，说明它觉得在你旁边是安全的。"],
-[3,"小宝把东西从桌子上推下去，一部分是狩猎本能在“试探猎物”，一部分可能就是想让你看它。"],
-// 4 照顾小宝
-[4,"布偶毛不太打结，但每周梳 2–3 次毛还是很有用，尤其是小宝的围兜、腋下和屁股附近。"],
-[4,"换季掉毛时每天梳一梳，能明显减少小宝吐毛球的次数。"],
-[4,"小宝体型大，猫砂盆最好选大号的，长度至少是它身体（不算尾巴）的 1.5 倍。"],
-[4,"布偶不太爱跳高，比起高高的猫爬架，小宝可能更喜欢低矮、宽大、稳当的窝。"],
-[4,"布偶警惕性不高，碰到危险不太会逃跑或反击，所以小宝最好一直当室内猫，窗户记得装纱网。"],
-[4,"布偶长得慢、容易胖，控制好零食量，定期称体重，比单看外形可靠——小宝的毛太蓬，胖了看不出来。"],
-[4,"猫的饮水机可以吸引不爱喝水的猫多喝一点，很多猫偏爱流动的水。"],
-[4,"水碗离食盆远一点更好。野外的猫会避开猎物附近的水源，有些猫在家里也保留这个习惯。"],
-[4,"每年一次体检；小宝满 7 岁以后，可以考虑半年一次。"],
-[4,"布偶的蓝眼睛容易有一点点泪痕，用干净湿棉片从眼角往外轻轻擦就好。"],
-[4,"每天 10–15 分钟逗猫棒游戏，能帮布偶这种“懒懒”的大猫保持体重和好心情。"],
-[4,"百合花对猫有剧毒，连花粉和花瓶里的水都可能导致肾衰竭。家里有小宝，最好别放百合。"],
-[4,"巧克力、葡萄、洋葱、大蒜对猫都有害。小宝再怎么蹭，也不能分给它。"],
-[4,"猫是专性肉食动物，需要从肉里获得牛磺酸，所以小宝不能吃狗粮或素食。"],
-[4,"猫的年龄换算：1 岁约等于人类 15 岁，2 岁约 24 岁，之后每一年大约相当于人类的 4 岁。算算小宝现在是几岁的“人”？"],
-[4,"小宝的指甲大约 2–3 周剪一次，只剪最前端透明的部分，避开里面粉色的血线。"],
-[4,"猫很依赖规律。每天固定时间喂饭、陪玩，小宝会更有安全感。"],
-];
-
 const $=id=>document.getElementById(id);
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let seen=new Set(store.get("xb-seen",[])), favs=new Set(store.get("xb-fav",[])), cur=store.get("xb-cur",0), hist=[];
 
-function render(){
-  $("fact").textContent=F[cur][1];
-  $("cat").textContent=LABELS[F[cur][0]];
-  $("fav").setAttribute("aria-pressed",favs.has(cur));
-  $("favN").textContent=favs.size; $("favN").hidden=!favs.size;
-}
-function go(i,dir=1){
-  const f=$("fact"); f.style.setProperty("--dx",(dir>0?-16:16)+"px"); f.classList.add("out");
-  setTimeout(()=>{cur=i;seen.add(i);store.set("xb-cur",cur);store.set("xb-seen",[...seen]);render();
-    f.style.setProperty("--dx",(dir>0?16:-16)+"px");requestAnimationFrame(()=>{f.classList.remove("out")})},200);
-}
-function next(){
-  hist.push(cur);
-  let pool=F.map((_,i)=>i).filter(i=>!seen.has(i)&&i!==cur);
-  if(!pool.length){seen=new Set([cur]);pool=F.map((_,i)=>i).filter(i=>i!==cur)}
-  go(pool[Math.floor(Math.random()*pool.length)],1);
-}
-function prev(){if(hist.length)go(hist.pop(),-1)}
-$("next").onclick=next;
-$("fav").onclick=()=>{favs.has(cur)?favs.delete(cur):favs.add(cur);store.set("xb-fav",[...favs]);render();if(favs.has(cur))burst($("fav"))};
-
-/* swipe on card */
-let sx=null;
-$("card").addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;sx=e.clientX});
-$("card").addEventListener("pointerup",e=>{if(sx===null)return;const d=e.clientX-sx;sx=null;if(d<-50)next();else if(d>50)prev()});
-document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")prev()});
-
-/* pet */
-const lines=["呼噜呼噜～","（眯起眼睛）","再摸一下嘛","（翻了个身）","（慢慢眨眼）","（开始踩奶）","喵～","（用头顶你的手）"];
-let pats=0,bt;
-$("photo").addEventListener("click",e=>{
-  if(e.target.closest("button"))return;
-  const r=$("photo").getBoundingClientRect();
-  for(let k=0;k<3;k++){const h=document.createElement("span");h.className="heart";h.textContent="♥";
-    h.style.left=(e.clientX-r.left+(k-1)*18)+"px";h.style.top=(e.clientY-r.top)+"px";h.style.setProperty("--r",(k-1)*18+"deg");
-    h.style.animationDelay=k*70+"ms";$("photo").appendChild(h);setTimeout(()=>h.remove(),1400)}
-  $("photo").classList.add("pat");setTimeout(()=>$("photo").classList.remove("pat"),180);
-  $("pethint").style.opacity=0;
-  pats++;
-  if(pats%3===1){document.querySelector(".bubble")?.remove();const b=document.createElement("div");b.className="bubble";
-    b.textContent=lines[Math.floor(pats/3)%lines.length];$("photo").appendChild(b);clearTimeout(bt);bt=setTimeout(()=>b.remove(),1600)}
-});
-function burst(el){const r=el.getBoundingClientRect(),h=document.createElement("span");h.className="heart";h.textContent="♥";
-  h.style.position="fixed";h.style.left=(r.left+r.width/2)+"px";h.style.top=r.top+"px";h.style.setProperty("--r","0deg");
-  document.body.appendChild(h);setTimeout(()=>h.remove(),1300)}
-
-/* favorites sheet */
-function openFav(){
-  const l=$("list");l.innerHTML="";
-  if(!favs.size){l.innerHTML='<p class="empty">还没有收藏。<br>看到喜欢的，点一下 ♡ 就会存到这里。</p>'}
-  [...favs].forEach(i=>{const d=document.createElement("div");d.className="item";
-    d.innerHTML='<span></span><button class="x" aria-label="取消收藏">♥</button>';d.firstChild.textContent=F[i][1];
-    d.querySelector("button").onclick=()=>{favs.delete(i);store.set("xb-fav",[...favs]);render();openFav()};l.appendChild(d)});
-  $("scrim").hidden=false;
-}
-$("openFav").onclick=openFav;
-$("scrim").onclick=e=>{if(e.target===$("scrim"))$("scrim").hidden=true};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")$("scrim").hidden=true});
-
-/* 小宝签 */
 const LINES=[
 "今天的计划：晒太阳，睡觉，被你摸。做完三件就是完美的一天。",
 "你出门的时候我没有在等你，我只是刚好睡在门口。",
@@ -453,11 +219,6 @@ function drawCard(idx){
   x.font=`400 26px ${FONT}`;x.fillStyle="#B4AAA3";x.fillText("sophiahuang19.github.io/xiaobao",W/2,H-70);
   return c.toDataURL("image/jpeg",.9);
 }
-
-/* sticks in the tube */
-[[4,118,-7],[16,132,-3],[28,112,2],[40,138,-1],[52,120,5],[64,130,1],[76,114,7],[88,126,3],[34,100,-5],[70,104,6]]
-  .forEach(([xp,h,r])=>{const i=document.createElement("i");i.style.cssText=`--x:${xp}%;--h:${h}px;--r:${r}deg`;$("sticks").appendChild(i)});
-
 /* wooden clack sound */
 let ac=null;
 function clack(){
@@ -469,43 +230,43 @@ function clack(){
     src.buffer=buf;src.connect(f).connect(g).connect(ac.destination);src.start(t);
   }catch(e){}
 }
+/* pet 小宝 */
+const petLines=["呼噜呼噜～","（眯起眼睛）","再摸一下嘛","（翻了个身）","（慢慢眨眼）","（开始踩奶）","喵～","（用头顶你的手）"];
+let pats=0,bt;
+$("photo").addEventListener("click",e=>{
+  const r=$("photo").getBoundingClientRect();
+  for(let k=0;k<3;k++){const h=document.createElement("span");h.className="heart";h.textContent="♥";
+    h.style.left=(e.clientX-r.left+(k-1)*18)+"px";h.style.top=(e.clientY-r.top)+"px";h.style.setProperty("--r",(k-1)*18+"deg");
+    h.style.animationDelay=k*70+"ms";$("photo").appendChild(h);setTimeout(()=>h.remove(),1400)}
+  $("photo").classList.add("pat");setTimeout(()=>$("photo").classList.remove("pat"),180);
+  $("pethint").style.opacity=0;
+  pats++;
+  if(pats%3===1){document.querySelector(".bubble")?.remove();const b=document.createElement("div");b.className="bubble";
+    b.textContent=petLines[Math.floor(pats/3)%petLines.length];$("photo").appendChild(b);clearTimeout(bt);bt=setTimeout(()=>b.remove(),1600)}
+});
 
-const NEED=1400;let shaken=0,holding=false,last=0,raf=0,done=false,motionAsked=false,motionBurst=0;
-const hintText=["按住签筒摇一摇，或者晃晃手机","摇呀摇……","签在里面乱跳……","快出来了！"];
+/* 签筒 */
+[[4,118,-7],[16,132,-3],[28,112,2],[40,138,-1],[52,120,5],[64,130,1],[76,114,7],[88,126,3],[34,100,-5],[70,104,6]]
+  .forEach(([xp,h,r])=>{const i=document.createElement("i");i.style.cssText=`--x:${xp}%;--h:${h}px;--r:${r}deg`;$("sticks").appendChild(i)});
+
+const NEED=1200;let shaken=0,holding=false,done=false,last=0,raf=0,picked=0;
 function tick(now){
   const dt=Math.min(now-last,50);last=now;
-  const active=holding||motionBurst>now;
-  $("tube").classList.toggle("shake",active);
-  if(active&&!done){
+  if(holding&&!done){
     shaken+=dt;if(Math.random()<.35)clack();
-    if(navigator.vibrate&&Math.random()<.2)navigator.vibrate(15);
-    $("meter").style.width=Math.min(100,shaken/NEED*100)+"%";
-    $("hint").textContent=hintText[Math.min(3,1+Math.floor(shaken/NEED*3))];
+    $("hint").textContent=shaken<NEED/2?"摇呀摇……":"快出来了！";
     if(shaken>=NEED){dropStick();return}
+    raf=requestAnimationFrame(tick);
   }
-  raf=requestAnimationFrame(tick);
 }
-function startLoop(){cancelAnimationFrame(raf);last=performance.now();raf=requestAnimationFrame(tick)}
-function askMotion(){
-  if(motionAsked)return;motionAsked=true;
-  const add=()=>window.addEventListener("devicemotion",onMotion);
-  if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==="function"){
-    DeviceMotionEvent.requestPermission().then(s=>{if(s==="granted")add()}).catch(()=>{});
-  }else add();
-}
-let prevA=null;
-function onMotion(e){
-  if($("letter").hidden||done)return;
-  const a=e.accelerationIncludingGravity||e.acceleration;if(!a||a.x==null)return;
-  if(prevA){const j=Math.abs(a.x-prevA.x)+Math.abs(a.y-prevA.y)+Math.abs(a.z-prevA.z);if(j>18)motionBurst=performance.now()+220}
-  prevA={x:a.x,y:a.y,z:a.z};
-}
-$("tube").addEventListener("pointerdown",e=>{if(done)return;e.preventDefault();askMotion();holding=true;$("tube").setPointerCapture?.(e.pointerId)});
-["pointerup","pointercancel","pointerleave"].forEach(ev=>$("tube").addEventListener(ev,()=>holding=false));
-$("tube").addEventListener("keydown",e=>{if(e.key===" "||e.key==="Enter"){e.preventDefault();holding=true}});
-$("tube").addEventListener("keyup",()=>holding=false);
+function startShake(){if(done)return;holding=true;$("tube").classList.add("shake");last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}
+function stopShake(){holding=false;$("tube").classList.remove("shake")}
+$("tube").addEventListener("pointerdown",e=>{if(done)return;e.preventDefault();startShake()});
+["pointerup","pointercancel","pointerleave"].forEach(ev=>$("tube").addEventListener(ev,stopShake));
+$("tube").addEventListener("contextmenu",e=>e.preventDefault());
+$("tube").addEventListener("keydown",e=>{if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();startShake()}});
+$("tube").addEventListener("keyup",stopShake);
 
-let picked=0;
 function pick(){
   const drawn=new Set(store.get("xb-drawn",[]));
   let pool=LINES.map((_,i)=>i).filter(i=>!drawn.has(i));
@@ -513,37 +274,26 @@ function pick(){
   const i=pool[Math.floor(Math.random()*pool.length)];drawn.add(i);store.set("xb-drawn",[...drawn]);return i;
 }
 function dropStick(){
-  done=true;holding=false;$("tube").classList.remove("shake");clack();setTimeout(clack,90);
-  if(navigator.vibrate)navigator.vibrate([30,40,60]);
-  picked=pick();store.set("xb-draw-date",dateKey());$("newdot").hidden=true;
+  done=true;stopShake();clack();setTimeout(clack,90);
+  picked=pick();
   const s=document.createElement("button");s.className="drawn";s.id="drawn";s.textContent=`第${cnNum(picked+1)}签`;
-  s.setAttribute("aria-label",`第${picked+1}签，点一下拿出来`);
+  s.setAttribute("aria-label",`第${picked+1}签，点一下看看`);
+  s.addEventListener("pointerdown",e=>e.stopPropagation());
+  s.onclick=()=>{s.classList.add("fly");setTimeout(showResult,380)};
   $("tube").appendChild(s);
-  $("hint").textContent="掉出来一支！点它，看看小宝说了什么";
-  s.onclick=e=>{e.stopPropagation();s.classList.add("fly");setTimeout(showResult,380)};
+  $("hint").innerHTML="掉出来一支！<b>点这支签</b>";
   setTimeout(()=>s.focus({preventScroll:true}),600);
 }
 function showResult(){
   const img=document.querySelector("#photo img"),go=()=>{
-    $("cardimg").src=drawCard(picked);$("cardimg").alt=`第${picked+1}签：${LINES[picked]}`;
-    $("stage").hidden=true;$("result").hidden=false;$("cardimg").style.animation="none";void $("cardimg").offsetWidth;$("cardimg").style.animation="";
+    $("cardimg").src=drawCard(picked);$("cardimg").alt=`第${picked+1}签：${LINES[picked]}`;$("result").hidden=false;$("again").focus({preventScroll:true});
   };
   img.complete&&img.naturalWidth?go():img.addEventListener("load",go,{once:true});
 }
-function resetDraw(){
-  done=false;shaken=0;holding=false;$("drawn")?.remove();$("meter").style.width="0";
-  $("hint").textContent=hintText[0];$("stage").hidden=false;$("result").hidden=true;startLoop();
-}
-function openLetter(){$("letter").hidden=false;resetDraw();setTimeout(()=>$("tube").focus({preventScroll:true}),50)}
-function closeLetter(){$("letter").hidden=true;cancelAnimationFrame(raf)}
-$("again").onclick=resetDraw;
-$("openLetter").onclick=openLetter;
-$("closeLetter").onclick=closeLetter;
-$("letter").addEventListener("click",e=>{if(e.target===$("letter"))closeLetter()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLetter()});
-$("newdot").hidden=store.get("xb-draw-date","")===dateKey();
-
-seen.add(cur);render();
+function reset(){done=false;shaken=0;$("drawn")?.remove();$("hint").textContent="按住签筒，摇一摇";$("result").hidden=true}
+$("again").onclick=()=>{reset();$("tube").focus({preventScroll:true})};
+$("close").onclick=reset;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("result").hidden)reset()});
 </script>
 
 </body>
