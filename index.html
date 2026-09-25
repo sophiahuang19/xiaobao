@@ -15,32 +15,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px}button,a{touch-action:manipulation}button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}button,a{outline-offset:5px}button:focus-visible,a:focus-visible{outline:2px solid var(--blue)}button:disabled{cursor:wait;opacity:.65}button,a{ -webkit-tap-highlight-color:transparent }button{transition:background .2s,transform .2s,opacity .2s}button:active{transform:scale(.98)}a{color:inherit;text-decoration:none}.app{max-width:1120px;margin:auto;padding:0 40px}.topbar{height:104px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:650}.brand-paw{font-size:32px;color:var(--blue)}.brand-en{font-size:10px;letter-spacing:.2em;font-weight:500;margin-left:7px;color:var(--muted)}.sound{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:11px 16px;border-radius:24px}.sound:hover{background:oklch(93% .018 80)}.companion{display:grid;grid-template-columns:1.05fr 1fr;gap:76px;align-items:center;padding:48px 0 38px}.photo{position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:140px 140px 24px 24px;overflow:hidden;background:oklch(90% .02 80);padding:0;box-shadow:0 18px 38px -25px oklch(35% .035 55 / .35)}.photo img{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .22s,transform .55s cubic-bezier(.16,1,.3,1)}.photo.pat img{transform:scale(1.025)}.photo img.changing{opacity:.25}.photo-tag{position:absolute;top:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;white-space:nowrap;padding:8px 13px;background:oklch(98% .01 80 / .94);border-radius:20px;font-size:11px}.photo-tag i{width:5px;height:5px;background:var(--blue);border-radius:50%}.pethint{position:absolute;bottom:19px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;padding:10px 16px;border-radius:24px;background:oklch(98% .01 80 / .94);transition:opacity .2s}.moods{display:flex;justify-content:center;gap:7px;margin-top:20px}.moods button{min-height:44px;padding:0 15px;border-radius:24px;color:var(--muted)}.moods button span{margin-right:5px;font-size:17px}.moods button:hover{background:oklch(93% .02 90)}.moods button[aria-pressed=true]{background:oklch(89% .025 145);color:oklch(34% .04 150)}.photo-note{text-align:center;color:var(--muted);font-size:10px;margin:12px 0 0;letter-spacing:.04em}.eyebrow{font-size:10px;letter-spacing:.15em;color:var(--muted);font-weight:550;margin:0 0 20px}h1{font-size:38px;font-weight:550;line-height:1.5;letter-spacing:.035em;margin:0 0 20px}.intro{font-size:14px;line-height:2;color:var(--muted);margin:0}.cat-message{font-size:16px;margin:28px 0 34px;color:var(--blue);min-height:24px}.together{font-size:11px;color:var(--muted);margin:24px 0 0}footer{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding:24px 0 30px;font-size:10px;color:var(--muted);letter-spacing:.08em}.heart{position:absolute;z-index:4;pointer-events:none;color:oklch(98% .01 80);font-size:25px;text-shadow:0 2px 8px var(--pink);animation:float 1s ease-out forwards}@keyframes float{from{opacity:1;transform:translate(-50%,-50%) scale(.6)}to{opacity:0;transform:translate(-50%,-100px) scale(1.2) rotate(var(--r))}}.bubble{position:absolute;left:50%;bottom:76px;transform:translateX(-50%);z-index:3;background:oklch(98% .01 80);color:var(--ink);font-size:13px;padding:10px 18px;border-radius:18px;white-space:nowrap;animation:pop .2s ease-out}@keyframes pop{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translate(-50%,0)}}
 /* 签筒 */
-.draw{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:28px 0;border-block:1px solid var(--line)}.fortune-copy{flex:1;min-width:0}.fortune-copy .eyebrow{font-size:9px}.fortune-copy h2{font-size:21px;font-weight:550;margin:9px 0}.fortune-copy p:not(.hint){font-size:12px;color:var(--muted);margin:0 0 20px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:46px;border-radius:25px;padding:0 20px;background:var(--blue);color:oklch(98% .01 80);font-size:12px;font-weight:550;cursor:pointer}.primary:hover{background:oklch(37% .055 150)}.primary span{font-size:18px}.tube-box{flex-shrink:0;margin-right:8px}
-.tube-box{width:calc(150px * var(--s));height:calc(300px * var(--s))}
-.tube{position:relative;width:150px;height:300px;transform:scale(var(--s));transform-origin:0 0;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab}
-.tube:focus-visible{outline:3px solid var(--blue);outline-offset:8px;border-radius:24px}
-.tube .rock{position:absolute;inset:0;transform-origin:50% 90%}
-.tube.shake .rock{animation:shake .14s linear infinite alternate}
-@keyframes shake{from{transform:rotate(-9deg) translateX(-4px)}to{transform:rotate(9deg) translateX(4px)}}
-.sticks{position:absolute;left:18px;right:18px;top:0;height:140px}
-.sticks i{position:absolute;bottom:0;width:11px;height:var(--h);left:var(--x);border-radius:5px 5px 2px 2px;background:linear-gradient(90deg,#E9D8BD,#F7EBD7 45%,#DCC6A4);transform:rotate(var(--r));transform-origin:50% 100%;box-shadow:0 0 0 1px rgba(90,62,46,.12)}
-.sticks i::before{content:"";position:absolute;top:0;left:0;right:0;height:18px;border-radius:5px 5px 0 0;background:#E3919F}
-.tube.shake .sticks i{animation:jig .1s linear infinite alternate}
-.tube.shake .sticks i:nth-child(odd){animation-duration:.13s}
-.tube.shake .sticks i:nth-child(3n){animation-duration:.08s}
-@keyframes jig{to{transform:rotate(var(--r)) translateY(-10px)}}
-.tube-body{position:absolute;z-index:2;left:0;right:0;bottom:0;height:200px;border-radius:14px 14px 34px 34px;background:linear-gradient(90deg,#3A2A21 0%,#6B4A37 30%,#7D5842 45%,#5A3E2E 70%,#2E211A 100%);box-shadow:inset 0 10px 0 -4px rgba(0,0,0,.35),0 26px 30px -18px rgba(40,25,15,.7)}
-.tube-body::before,.tube-body::after{content:"";position:absolute;left:0;right:0;height:8px;background:rgba(0,0,0,.18)}
-.tube-body::before{top:34px}.tube-body::after{bottom:34px}
-.tube-label{position:absolute;left:50%;top:56px;transform:translateX(-50%);background:#F7F1EA;color:#3A2A21;writing-mode:vertical-rl;font-family:var(--display);font-size:22px;letter-spacing:.2em;padding:10px 7px;border-radius:6px;display:flex;align-items:center;gap:4px}
-.tube-label svg{width:16px;height:16px;fill:#E3919F}
-.drawn{position:absolute;left:50%;top:0;width:26px;height:230px;margin-left:-13px;border-radius:8px 8px 4px 4px;background:linear-gradient(90deg,#E9D8BD,#FBF1E0 45%,#DCC6A4);box-shadow:0 10px 30px rgba(0,0,0,.4);z-index:1;display:flex;flex-direction:column;align-items:center;padding-top:34px;writing-mode:vertical-rl;font-size:15px;color:#5A3E2E;letter-spacing:.15em;font-weight:600;animation:popout .6s cubic-bezier(.16,1,.3,1) forwards}
-.drawn::before{content:"";position:absolute;top:0;left:0;right:0;height:26px;border-radius:8px 8px 0 0;background:#E3919F}
-@keyframes popout{from{transform:translateY(110px)}to{transform:translateY(-130px) rotate(4deg)}}
-.drawn.fly{animation:flyaway .45s ease-in forwards}
-@keyframes flyaway{from{transform:translateY(-130px) rotate(4deg)}to{transform:translateY(-110vh) rotate(-20deg);opacity:0}}
-.drawn:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
-.hint{margin:12px 0 0;font-size:10px;color:var(--muted);line-height:1.6;min-height:16px}.hint b{color:var(--blue);font-weight:550}
+.draw{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:28px 0;border-block:1px solid var(--line)}.fortune-copy{flex:1;min-width:0}.fortune-copy .eyebrow{font-size:9px}.fortune-copy h2{font-size:21px;font-weight:550;margin:9px 0}.fortune-copy p:not(.hint){font-size:12px;color:var(--muted);margin:0 0 20px}.primary{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:46px;border-radius:25px;padding:0 20px;background:var(--blue);color:oklch(98% .01 80);font-size:12px;font-weight:550;cursor:pointer}.primary:hover{background:oklch(37% .055 150)}.primary span{font-size:18px}.hint{margin:12px 0 0;font-size:10px;color:var(--muted);line-height:1.6;min-height:16px}.hint b{color:var(--blue);font-weight:550}
 .result{border:1px solid var(--line);color:var(--ink);background:var(--ground);border-radius:24px;padding:30px 24px 24px;width:min(440px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;box-shadow:0 30px 100px oklch(20% .02 55 / .25)}.result[open]{display:flex;flex-direction:column;align-items:center;gap:16px;animation:rise .24s cubic-bezier(.16,1,.3,1)}.result::backdrop{background:oklch(22% .025 55 / .45)}.result .eyebrow{margin:4px 24px 0;letter-spacing:.08em}.close{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;font-size:24px;color:var(--muted)}.close:hover{background:oklch(90% .02 80)}.cardimg{display:block;width:auto;max-width:100%;max-height:60dvh;border-radius:16px}.save-hint{font-size:11px;color:var(--muted);margin:0}.result-actions{display:flex;gap:12px;justify-content:center}.again{min-height:46px;padding:0 20px;border:1px solid var(--line);border-radius:25px;font-size:12px}@keyframes rise{from{opacity:0;transform:translateY(16px)}}
 @media(min-width:1100px){.companion{gap:90px}.welcome{padding-right:12px}}
 /* Phone layout keeps the cat and the primary action within thumb reach. */
@@ -62,6 +37,14 @@
 }
 @media(max-width:360px){.app{padding-inline:16px}h1{font-size:22px}.brand-en{display:none}.moods button{font-size:13px}.photo{border-radius:64px 64px 20px 20px}#draw-button{width:calc(100% - 32px)}footer{font-size:9px}}
 @media(max-width:760px) and (max-height:540px){.photo{height:260px}.cardimg{max-height:none;width:220px}.result{max-height:calc(100dvh - 12px)}.result-actions{flex-shrink:0}}
+/* Little discoveries live in the portrait itself. */
+.portrait-section{position:relative}.photo{border-radius:90px 90px 36px 36px;isolation:isolate}.photo img{transition:opacity .22s,transform .55s cubic-bezier(.16,1,.3,1),translate .3s ease-out}
+.play-controls{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px}.play-controls button{min-height:46px;padding:0 17px;border-radius:24px;font-size:13px;color:var(--blue);background:oklch(91% .024 145)}.play-controls #original{background:none;color:var(--muted);font-size:12px;text-decoration:underline;text-underline-offset:5px}
+.draw{display:block;border:0;padding:6px 0 0;min-height:0}.hint{font-size:12px;line-height:1.7}.cat-message{min-height:48px}.intro{max-width:28ch}.together{margin-top:20px}.secret-note{position:absolute;z-index:5;right:16px;top:62%;min-width:130px;min-height:74px;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;background:oklch(97% .028 85);color:var(--ink);border-radius:3px 3px 20px 3px;box-shadow:0 8px 22px oklch(30% .03 60 / .18);transform:rotate(-8deg);font-size:14px;animation:note-arrives .4s cubic-bezier(.16,1,.3,1)}.secret-note:active{transform:rotate(-4deg)}.secret-note>span:first-child{color:var(--pink);font-size:25px}.bubble{max-width:calc(100% - 24px);white-space:normal;text-align:center;line-height:1.6;width:max-content;bottom:64px}.portrait-section:has(.secret-note:not([hidden])) .bubble{bottom:auto;top:66px}.feather{position:absolute;z-index:4;top:16%;left:12%;font-size:48px;pointer-events:none;animation:feather-play 1.6s ease-in-out both}.sneeze img{animation:sneeze .4s ease-out}
+@keyframes note-arrives{from{opacity:0;transform:translateY(18px) rotate(2deg)}to{opacity:1;transform:translateY(0) rotate(-8deg)}}
+@keyframes feather-play{0%{opacity:0;transform:translate(0,20px) rotate(-25deg)}20%{opacity:1}55%{transform:translate(100px,-10px) rotate(25deg)}85%{opacity:1}100%{opacity:0;transform:translate(50px,80px) rotate(-15deg)}}
+@keyframes sneeze{35%{transform:translateY(4px) rotate(-1deg) scale(1.015)}70%{transform:translateY(-2px) rotate(1deg)}to{transform:none}}
+@media(max-width:760px){.companion{gap:8px}.photo{height:clamp(260px,49svh,440px);border-radius:64px 64px 28px 28px}.photo-tag{top:18px}.cat-message{margin-top:4px;min-height:24px;font-size:13px}.draw{padding:0;text-align:center}.hint{margin:0;font-size:12px}.photo-note{margin-top:4px}.play-controls{margin-top:8px}.together{margin-top:0;font-size:11px}footer{border:0}.secret-note{top:58%;right:12px}.welcome>.intro{display:none}}
 @media(prefers-reduced-motion:reduce){.drawn,.drawn:active{transform:translateY(-130px) rotate(4deg)}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -73,14 +56,10 @@
       <button class="photo" id="photo" aria-label="摸摸小宝">
         <img id="cat-image" src="assets/happy.jpg" alt="小宝伸出毛茸茸的爪子，想和你贴贴" fetchpriority="high">
         <span class="photo-tag"><i></i><span id="mood-tag">想和你贴贴</span></span>
-        <span class="pethint" id="pethint">轻轻点一下，摸摸小宝 ♡</span>
+        <span class="pethint" id="pethint">摸摸脑袋，也试试爪爪 ♡</span>
       </button>
-      <div class="moods" role="group" aria-label="小宝的心情">
-        <button data-mood="happy" aria-pressed="true"><span>♡</span> 贴贴</button>
-        <button data-mood="curious" aria-pressed="false"><span>✧</span> 好奇</button>
-        <button data-mood="sleepy" aria-pressed="false"><span>☾</span> 困困</button>
-        <button data-mood="original" aria-pressed="false"><span>◉</span> 本尊</button>
-      </div>
+      <button class="secret-note" id="secret-note" hidden aria-label="打开小宝递来的纸条"><span aria-hidden="true">♡</span> 给你的 <span aria-hidden="true">↗</span></button>
+      <div class="play-controls"><button id="play" aria-label="用羽毛逗逗小宝">🪶 逗逗它</button><button id="original" aria-pressed="false">看看本尊</button></div>
       <p class="photo-note" id="photo-note">小宝的想象日常 · AI 生成</p>
     </section>
     <section class="welcome">
@@ -88,17 +67,7 @@
       <h1>来啦，<br>陪小宝待一会儿。</h1>
       <p class="intro">外面的世界先等等。<br>这里有一只软软的小猫，和一点小小的好运。</p>
       <p class="cat-message" id="cat-message" aria-live="polite">“今天也想被你摸摸。”</p>
-      <section class="draw" aria-labelledby="fortune-title">
-        <div class="fortune-copy"><span class="eyebrow">A NOTE FOR YOU</span><h2 id="fortune-title">抽一支小宝签</h2><p>让小宝送你一句悄悄话。</p><button id="draw-button" class="primary">摇一摇，接住小好运 <span aria-hidden="true">↗</span></button><p class="hint" id="hint" aria-live="polite">也可以按住右边的签筒</p></div>
-    <div class="tube-box">
-      <div class="tube" id="tube" role="button" tabindex="0" aria-label="按住签筒摇一摇，抽一支小宝签">
-        <div class="rock">
-          <div class="sticks" id="sticks"></div>
-          <div class="tube-body"><span class="tube-label">小宝签<svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="14" cy="6.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/></svg></span></div>
-        </div>
-      </div>
-    </div>
-      </section>
+      <div class="draw"><button id="draw-button" class="primary">小宝，有话对我说吗？ <span aria-hidden="true">↗</span></button><p class="hint" id="hint" aria-live="polite">摸摸它，说不定有小惊喜。</p></div>
       <p class="together" id="together">不用赶时间，小宝一直在。</p>
     </section>
   </div>
@@ -226,62 +195,63 @@ function clack(){
     src.buffer=buf;src.connect(f).connect(g).connect(ac.destination);src.start(t);
   }catch(e){}
 }
-/* pet 小宝 */
-const petLines=["呼噜呼噜～","（眯起眼睛）","再摸一下嘛","（翻了个身）","（慢慢眨眼）","（开始踩奶）","喵～","（用头顶你的手）"];
-let pats=0,bt;
-$("photo").addEventListener("click",e=>{
-  const r=$("photo").getBoundingClientRect();
-  const px=e.detail?e.clientX:r.left+r.width/2,py=e.detail?e.clientY:r.top+r.height/2;
-  for(let k=0;k<3;k++){const h=document.createElement("span");h.className="heart";h.textContent="♥";
-    h.style.left=(px-r.left+(k-1)*18)+"px";h.style.top=(py-r.top)+"px";h.style.setProperty("--r",(k-1)*18+"deg");
-    h.style.animationDelay=k*70+"ms";$("photo").appendChild(h);setTimeout(()=>h.remove(),1400)}
-  $("photo").classList.add("pat");setTimeout(()=>$("photo").classList.remove("pat"),180);
-  $("pethint").style.opacity=0;
-  pats++;
-  $("together").textContent=`今天已经摸摸小宝 ${pats} 次，呼噜呼噜。`;
-  if(currentMood!=="happy")setMood("happy");
-  if(pats%3===1){document.querySelector(".bubble")?.remove();const b=document.createElement("div");b.className="bubble";
-    b.textContent=petLines[Math.floor(pats/3)%petLines.length];$("photo").appendChild(b);clearTimeout(bt);bt=setTimeout(()=>b.remove(),1600)}
-});
-
-/* 签筒 */
-[[4,118,-7],[16,132,-3],[28,112,2],[40,138,-1],[52,120,5],[64,130,1],[76,114,7],[88,126,3],[34,100,-5],[70,104,6]]
-  .forEach(([xp,h,r])=>{const i=document.createElement("i");i.style.cssText=`--x:${xp}%;--h:${h}px;--r:${r}deg`;$("sticks").appendChild(i)});
-
-const NEED=900;let shaken=0,holding=false,done=false,last=0,raf=0,picked=0;
-function tick(now){
-  const dt=Math.min(now-last,50);last=now;
-  if(holding&&!done){
-    shaken+=dt;if(Math.random()<.35)clack();
-    $("hint").textContent=shaken<NEED/2?"摇呀摇……":"快出来了！";
-    if(shaken>=NEED){dropStick();return}
-    raf=requestAnimationFrame(tick);
-  }
+/* The portrait is a small living scene, rather than a mood selector. */
+let pats=0,bt,idleTimer,playTimer,lastPet=0;
+let done=false,picked=0;
+const reduced=matchMedia("(prefers-reduced-motion: reduce)");
+function say(text){
+  $("cat-message").textContent=text;
+  document.querySelector(".bubble")?.remove();
+  const b=document.createElement("span");b.className="bubble";b.textContent=text;$("photo").appendChild(b);
+  clearTimeout(bt);bt=setTimeout(()=>b.remove(),2400);
 }
-function startShake(){if(done||holding)return;holding=true;$("tube").classList.add("shake");last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}
-function stopShake(){holding=false;cancelAnimationFrame(raf);$("tube").classList.remove("shake");if(!done){$("draw-button").disabled=false;$("draw-button").textContent="摇一摇，接住小好运 ↗";$("hint").textContent="也可以按住右边的签筒"}}
-$("tube").addEventListener("pointerdown",e=>{if(done)return;e.preventDefault();startShake()});
-["pointerup","pointercancel","pointerleave"].forEach(ev=>$("tube").addEventListener(ev,stopShake));
-$("tube").addEventListener("contextmenu",e=>e.preventDefault());
-$("tube").addEventListener("keydown",e=>{if((e.key===" "||e.key==="Enter")&&!e.repeat){e.preventDefault();startShake()}});
-$("tube").addEventListener("keyup",stopShake);
-
+function restLater(){clearTimeout(idleTimer);idleTimer=setTimeout(async()=>{
+  if(document.hidden||$("result").open)return;
+  await setMood("sleepy");say("你忙你的，我先眯一小会儿。");
+},22000)}
+function offerNote(){
+  if(done)return;done=true;picked=pick();clack();$("secret-note").hidden=false;
+  $("draw-button").textContent="接住小宝的悄悄话 ↗";
+  $("hint").textContent="它把一张纸条压在爪爪下面。";
+}
+function traces(x,y,symbol="♡"){
+  if(reduced.matches)return;
+  for(let k=0;k<3;k++){const h=document.createElement("span");h.className="heart";h.textContent=symbol;
+    h.style.left=(x+(k-1)*20)+"px";h.style.top=y+"px";h.style.setProperty("--r",(k-1)*16+"deg");
+    h.style.animationDelay=k*90+"ms";$("photo").appendChild(h);setTimeout(()=>h.remove(),1300)}
+}
+async function pet(e){
+  const now=performance.now();if(now-lastPet<300)return;lastPet=now;clearTimeout(playTimer);
+  const r=$("photo").getBoundingClientRect(),x=e.detail?e.clientX-r.left:r.width/2,y=e.detail?e.clientY-r.top:r.height/3;
+  const paw=y>r.height*.62;const sleepy=currentMood==="sleepy";
+  pats++;await setMood(paw?"curious":"happy");
+  traces(x,y,paw?"✧":"♡");$("photo").classList.add("pat");setTimeout(()=>$("photo").classList.remove("pat"),250);
+  const replies=paw?["抓到你了，这只手归我。","肉垫只给你捏一下。","你碰了我的小开关。"]:["呼噜呼噜……发动机启动。","再往左一点，对，就是那里。","已盖章：这是我的人类。"];
+  say(sleepy?"嗯？是你呀，那再陪你一会儿。":replies[(pats-1)%replies.length]);
+  $("together").textContent=pats<3?"它好像又靠近了你一点。":"今天的小宝，已经被你哄好了。";
+  if(pats===3){offerNote();say("等一下，爪爪下面有东西给你。");}
+  if(pats%7===0){say("阿嚏！……刚才不算，重新可爱。");$("photo").classList.add("sneeze");setTimeout(()=>$("photo").classList.remove("sneeze"),450)}
+  restLater();
+}
+$("photo").addEventListener("click",pet);
+$("photo").addEventListener("pointermove",e=>{
+  if(e.pointerType!=="mouse"||reduced.matches)return;
+  const r=$("photo").getBoundingClientRect();$("cat-image").style.translate=`${(e.clientX-r.left-r.width/2)*.012}px ${(e.clientY-r.top-r.height/2)*.012}px`;
+});
+$("photo").addEventListener("pointerleave",()=>$("cat-image").style.translate="0 0");
+$("play").onclick=async()=>{
+  clearTimeout(playTimer);clearTimeout(idleTimer);await setMood("curious");say("别动，我看到那根羽毛了。");
+  document.querySelector(".feather")?.remove();const f=document.createElement("span");f.className="feather";f.textContent="🪶";f.setAttribute("aria-hidden","true");$("photo").appendChild(f);
+  setTimeout(()=>f.remove(),1700);
+  playTimer=setTimeout(async()=>{await setMood("happy");say("抓到了！奖励你摸一下。");restLater()},1600);
+};
+$("original").onclick=async()=>{clearTimeout(playTimer);clearTimeout(idleTimer);await setMood(currentMood==="original"?"happy":"original");restLater()};
+$("secret-note").onclick=showResult;
 function pick(){
   const drawn=new Set(store.get("xb-drawn",[]));
   let pool=LINES.map((_,i)=>i).filter(i=>!drawn.has(i));
   if(!pool.length){drawn.clear();pool=LINES.map((_,i)=>i)}
   const i=pool[Math.floor(Math.random()*pool.length)];drawn.add(i);store.set("xb-drawn",[...drawn]);return i;
-}
-function dropStick(){
-  done=true;stopShake();$("draw-button").disabled=false;$("draw-button").textContent="打开小宝的悄悄话 ↗";clack();setTimeout(clack,90);
-  picked=pick();
-  const s=document.createElement("button");s.className="drawn";s.id="drawn";s.textContent=`第${cnNum(picked+1)}签`;
-  s.setAttribute("aria-label",`第${picked+1}签，点一下看看`);
-  s.addEventListener("pointerdown",e=>e.stopPropagation());
-  s.onclick=()=>{s.classList.add("fly");setTimeout(showResult,380)};
-  $("tube").appendChild(s);
-  $("hint").innerHTML="掉出来一支！<b>点这支签</b>";
-  setTimeout(()=>{if(s.isConnected&&!$("result").open)s.focus({preventScroll:true})},600);
 }
 let resultBusy=false;
 async function showResult(){
@@ -294,14 +264,13 @@ async function showResult(){
   }catch(error){$("hint").textContent="图片还没准备好，再点一次试试。"}
   finally{resultBusy=false}
 }
-function reset(){stopShake();done=false;shaken=0;$("drawn")?.remove();$("hint").textContent="也可以按住右边的签筒";$("draw-button").disabled=false;$("draw-button").textContent="摇一摇，接住小好运 ↗"}
-$("draw-button").onclick=()=>{if(done){showResult();return}startShake();$("draw-button").disabled=true;$("draw-button").textContent="小宝正在挑选……"};
+function reset(){done=false;$("secret-note").hidden=true;$("draw-button").textContent="小宝，再说一句悄悄话 ↗";$("hint").textContent="小好运已经装进口袋了。";restLater()}
+$("draw-button").onclick=()=>{clearTimeout(idleTimer);offerNote();showResult()};
 let drawAgain=false;
 $("again").onclick=()=>{drawAgain=true;$("result").close()};
 $("close").onclick=()=>$("result").close();
 $("result").addEventListener("close",()=>{reset();$("draw-button").focus();if(drawAgain){drawAgain=false;$("draw-button").click()}});
-window.addEventListener("blur",stopShake);
-document.addEventListener("visibilitychange",()=>{if(document.hidden)stopShake()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){clearTimeout(idleTimer);clearTimeout(playTimer)}else restLater()});
 const moods={
   happy:{src:"assets/happy.jpg",tag:"想和你贴贴",message:"“今天也想被你摸摸。”",alt:"小宝伸出毛茸茸的爪子，想和你贴贴"},
   curious:{src:"assets/curious.jpg",tag:"发现一点新鲜事",message:"“那是什么？让我看看。”",alt:"小宝歪着脑袋，蓝眼睛好奇地望着羽毛"},
@@ -316,11 +285,11 @@ async function setMood(key){
     img.src=m.src;img.alt=m.alt;currentMood=key;
     $("mood-tag").textContent=m.tag;$("cat-message").textContent=m.message;
     $("photo-note").textContent=key==="original"?"小宝的真实照片":"小宝的想象日常 · AI 生成";
-    document.querySelectorAll("[data-mood]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mood===key)));
+    $("original").setAttribute("aria-pressed",String(key==="original"));
     img.classList.remove("changing");
   }catch(error){if(request===moodRequest){img.classList.remove("changing");$("cat-message").textContent="小宝还没准备好，过会儿再试试。"}}
 }
-document.querySelectorAll("[data-mood]").forEach(b=>b.onclick=()=>setMood(b.dataset.mood));
+restLater();
 $("cat-image").addEventListener("error",()=>{if(!$("cat-image").src.endsWith("xiaobao.jpg"))setMood("original")});
 </script>
 

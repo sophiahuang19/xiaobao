@@ -8,11 +8,13 @@ Serve this directory with any static server, for example `python3 -m http.server
 
 ## Interactions
 
-- Tap the portrait or focus it and press Enter/Space to pet Xiaobao.
-- Select 贴贴 / 好奇 / 困困 / 本尊 to change the portrait. Petting returns Xiaobao to 贴贴.
-- Tap the draw button, or hold the wooden tube using pointer or Enter/Space. Open the drawn stick to read your fortune.
+- Tap Xiaobao's head or paws for different responses. Enter/Space on the portrait pets his head.
+- After three pets, discover the little note under his paw. Every seventh pet brings a small sneeze.
+- Use 逗逗它 to play with a feather, or 看看本尊 to see the original photo.
+- After 22 seconds of quiet, Xiaobao falls asleep. Pet him to wake him up.
+- Ask for a note at any time using the main button; surprises never gate access to fortunes.
 - Save the generated card with 保存签卡, or long-press the image on mobile.
-- Sound is optional and starts off. Reduced-motion preferences are respected.
+- Optional sound starts off. Reduced-motion preferences are respected and hidden tabs pause idle behavior.
 - Draw history is stored locally when available. No account or backend is required.
 
 Generated-image prompts and provenance are recorded in IMAGE-ASSETS.md.
