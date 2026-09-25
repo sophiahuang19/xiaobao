@@ -80,6 +80,28 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .item .x{color:var(--pink);font-size:18px;line-height:1.5}
 .empty{color:var(--muted);font-size:14px;text-align:center;padding:28px 0}
 
+/* today's letter */
+.topbar.left{left:14px;right:auto}
+.round .newdot{position:absolute;top:1px;right:1px;width:11px;height:11px;border-radius:50%;background:var(--pink);border:2px solid #fff}
+.letter{position:fixed;inset:0;z-index:20;background:rgba(14,9,6,.78);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:56px 16px calc(24px + env(safe-area-inset-bottom,0px));animation:fade .25s}
+.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:24px;line-height:42px;text-align:center}
+.env{position:relative;width:min(300px,78vw);aspect-ratio:1.5;perspective:800px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-1deg)}}
+.env .body{position:absolute;inset:0;border-radius:14px;background:#F7F1EA;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);overflow:hidden}
+.env .body::before,.env .body::after{content:"";position:absolute;bottom:0;width:60%;height:70%;background:#EFE5DA}
+.env .body::before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}
+.env .body::after{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.env .flap{position:absolute;inset:0 0 auto 0;height:58%;background:#E9DDD0;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s ease;z-index:2;border-radius:14px 14px 0 0}
+.env .seal{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);z-index:3;width:54px;height:54px;border-radius:50%;background:var(--pink);display:grid;place-items:center;box-shadow:0 4px 10px rgba(120,40,50,.35);transition:opacity .25s}
+.env .seal svg{width:28px;height:28px;fill:#fff}
+.env.open{animation:none}
+.env.open .flap{transform:rotateX(180deg)}
+.env.open .seal{opacity:0}
+.letter-label{color:#fff;margin:0;font-size:15px;letter-spacing:.08em;opacity:.9}
+.cardimg{display:block;max-width:min(360px,100%);max-height:calc(100% - 60px);width:auto;height:auto;border-radius:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);animation:rise .55s cubic-bezier(.2,.8,.2,1);-webkit-touch-callout:default}
+@keyframes rise{from{opacity:0;transform:translateY(60px) scale(.9)}}
+.save-hint{color:#fff;opacity:.75;font-size:13px;margin:0;letter-spacing:.04em}
+
 @media (max-height:640px){.name h1{font-size:44px}.fact{font-size:16px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -88,6 +110,12 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 <main class="app">
   <div class="photo" id="photo">
     <img src="xiaobao.jpg" alt="小宝：海豹色双色布偶猫，蓝眼睛，粉鼻子">
+    <div class="topbar left">
+      <button class="round" id="openLetter" aria-label="今日小宝" style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+        <span class="newdot" id="newdot" hidden></span>
+      </button>
+    </div>
     <div class="topbar">
       <button class="round" id="openFav" aria-label="我的收藏" style="position:relative">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="currentColor"/></svg>
@@ -109,6 +137,17 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
     </div>
   </section>
 </main>
+
+<div class="letter" id="letter" role="dialog" aria-label="今日小宝" hidden>
+  <button class="close" id="closeLetter" aria-label="关闭">×</button>
+  <button class="env" id="env" aria-label="拆开小宝的信">
+    <span class="body"></span><span class="flap"></span>
+    <span class="seal"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="6" cy="10" r="2.2"/><circle cx="10" cy="6.5" r="2.2"/><circle cx="14" cy="6.5" r="2.2"/><circle cx="18" cy="10" r="2.2"/></svg></span>
+  </button>
+  <p class="letter-label" id="letterLabel">小宝给你的信 · 点一下拆开</p>
+  <img class="cardimg" id="cardimg" alt="" hidden>
+  <p class="save-hint" id="saveHint" hidden>长按图片，保存或发给朋友</p>
+</div>
 
 <div class="scrim" id="scrim" hidden>
   <div class="sheet" role="dialog" aria-label="我的收藏">
@@ -291,6 +330,130 @@ function openFav(){
 $("openFav").onclick=openFav;
 $("scrim").onclick=e=>{if(e.target===$("scrim"))$("scrim").hidden=true};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")$("scrim").hidden=true});
+
+/* today's letter */
+const LINES=[
+"今天的计划：晒太阳，睡觉，被你摸。做完三件就是完美的一天。",
+"你出门的时候我没有在等你，我只是刚好睡在门口。",
+"我对你慢慢眨眼了，这在猫语里是“我信任你”。你也眨一下。",
+"我的蓝眼睛里没有蓝色色素。你看到的蓝，是光的魔法。",
+"我这么沉不是胖，布偶要长到四岁才算长大。大概吧。",
+"被抱起来的时候我会软成一摊，这是我们布偶的招牌动作。",
+"我一天要睡十四个小时，剩下的时间用来想你。和想吃的。",
+"你打字的时候，键盘是全家最暖和的地方。",
+"我竖着尾巴走向你，意思是：你好呀，今天也很高兴见到你。",
+"我用脸蹭你，是在给你盖章：这个人类是小宝的。",
+"我踩你的时候，说明我很安心。请不要动，也不要喊疼。",
+"给我一个纸箱，我可以开心一整天。",
+"我喵喵叫只说给你听，猫和猫之间才不这么说话。",
+"我知道“小宝”是在叫我。要不要回头，看心情。",
+"我胸前这圈白毛是全身最软的地方，今天允许你摸三下。",
+"我不爱爬高，我更喜欢待在你脚边。",
+"我背对着你睡觉，是把看不到的方向交给你了。",
+"窗外有只鸟。我今天的工作很忙。",
+"我把杯子推下桌子，是想确认一下重力今天还在不在。",
+"我不是不理你，我只是在用耳朵听你。",
+"今天也要像我一样：困了就睡，饿了就吃，想要就去蹭。",
+"你回家的脚步声，我隔着门就能听出来。",
+"天冷了，我的耳朵会变得更深一点。这是冬季限定款。",
+"我的鼻纹全世界独一份，就像你在我心里一样。",
+"呼噜呼噜是我的发动机。你一摸，它就启动。",
+"我的肚子是一个陷阱，你摸之前要想清楚。",
+"请多陪我玩十分钟逗猫棒，这样我就不会半夜开运动会。",
+"我喝水很讲究：要流动的，要新鲜的，最好是你杯子里的。",
+"我舔你有点刺，那是我舌头上的小梳子，不是嫌弃你。",
+"我走路踮着脚尖，所以你永远听不到我过来。",
+"你忙的时候，我就在旁边睡觉陪你。",
+"我吃不出甜味，所以你的蛋糕我只是闻闻。真的只是闻闻。",
+"我的胡子有多宽，我就能钻多宽的缝。今天钻进了你的被子。",
+"如果我盯着空气看，别怕，我只是听见了你听不见的声音。",
+"我睡着的时候爪子在动，是在梦里追东西。",
+"梳毛时间到了。我的围兜需要专业护理。",
+"我今天的心情：软软的，蓬蓬的，想被抱一下。",
+"你看手机的时间，可以分一点给我吗？",
+"我脚底是粉色的肉垫，今天允许你捏一下。",
+"我小时候是一团白毛球，颜色是慢慢长出来的。你也慢慢来。",
+"下雨天最适合的事：趴在窗边，听雨，打呼噜。",
+"我不是黏人，我只是刚好想和你待在同一个房间。",
+"请记得给我换水。这是我今天唯一的要求。之一。",
+"我的尾巴甩得很快的时候，意思是“够了”，不是“好开心”。",
+"早上五点叫你起床，是因为我是晨昏动物，不是故意的。",
+"我把玩具叼给你，是请你一起玩的邀请函。",
+"今天好好吃饭了吗？我吃了，吃了三顿。",
+"我在你身边打了个哈欠，意思是这里很安全。",
+"我的耳朵能转一百八十度，你说我坏话我都听得到。",
+"你难过的时候，我就趴在你身上。重一点也没关系吧。",
+"我不会说谢谢，但我会一直坐在你旁边。",
+"被窝是我的，你的枕头也是我的，你也是我的。",
+"我今天学会了一件事：只要一直看着你，零食就会出现。",
+"太阳挪到哪，我就挪到哪。",
+"我的毛不太打结，但你给我梳毛的时候，我还是会装作很需要。",
+"我们布偶被叫作“小狗猫”，因为会跟着你走来走去。我承认。",
+"你开门的时候我会去迎接你，这是布偶的礼仪。",
+"今天也辛苦了。回来摸摸我，就能充电。",
+"我不需要很多东西。一个你，一扇有阳光的窗，就够了。",
+"我不会看时间，但我知道你几点该回家。"
+];
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function todayIndex(date=new Date()){
+  const days=Math.floor((Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())-Date.UTC(2026,0,1))/864e5);
+  const n=LINES.length,cycle=Math.floor(days/n),pos=((days%n)+n)%n;
+  const order=[...Array(n).keys()],r=rng(20260925+cycle);
+  for(let i=n-1;i>0;i--){const j=Math.floor(r()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+  return order[pos];
+}
+const dateKey=(d=new Date())=>`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+function wrapZh(ctx,text,maxW){
+  const noStart="，。！？、：；）」』”…",lines=[];let line="";
+  for(const ch of text){
+    if(ctx.measureText(line+ch).width>maxW&&line&&!noStart.includes(ch)){lines.push(line);line=ch}else line+=ch;
+  }
+  if(line)lines.push(line);return lines;
+}
+function drawCard(){
+  const W=1080,H=1440,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  const FONT='"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif';
+  x.fillStyle="#FBF8F5";x.fillRect(0,0,W,H);
+  // arched photo
+  const px=110,py=110,pw=W-220,ph=740,R=pw/2,br=44,img=document.querySelector("#photo img");
+  x.save();x.beginPath();x.moveTo(px,py+R);x.arc(px+R,py+R,R,Math.PI,0);x.lineTo(px+pw,py+ph-br);
+  x.quadraticCurveTo(px+pw,py+ph,px+pw-br,py+ph);x.lineTo(px+br,py+ph);x.quadraticCurveTo(px,py+ph,px,py+ph-br);x.closePath();x.clip();
+  const s=Math.max(pw/img.naturalWidth,ph/img.naturalHeight),iw=img.naturalWidth*s,ih=img.naturalHeight*s;
+  x.drawImage(img,px+(pw-iw)/2,py+(ph-ih)*0.28,iw,ih);x.restore();
+  // date
+  const d=new Date();x.textAlign="center";x.fillStyle="#9A8F88";x.font=`500 36px ${FONT}`;
+  x.fillText(`${d.getMonth()+1}月${d.getDate()}日 · 星期${"日一二三四五六"[d.getDay()]}`,W/2,py+ph+86);
+  // line
+  x.fillStyle="#2E221C";x.font=`600 58px ${FONT}`;
+  const lines=wrapZh(x,LINES[todayIndex()],W-260),lh=88,top=py+ph+130+(3-lines.length)*lh/2;
+  lines.forEach((l,i)=>x.fillText(l,W/2,top+lh*(i+0.75)));
+  // signature + paw
+  x.font=`500 38px ${FONT}`;x.fillStyle="#6E625B";x.fillText("—— 小宝",W/2-26,H-150);
+  const cx=W/2+110,cy=H-164;x.fillStyle="#E3919F";
+  x.beginPath();x.ellipse(cx,cy+8,16,13,0,0,7);x.fill();
+  [[-17,-8],[-7,-20],[7,-20],[17,-8]].forEach(([a,b])=>{x.beginPath();x.arc(cx+a,cy+b,6.5,0,7);x.fill()});
+  x.font=`400 26px ${FONT}`;x.fillStyle="#B4AAA3";x.fillText("sophiahuang19.github.io/xiaobao",W/2,H-70);
+  return c.toDataURL("image/jpeg",.9);
+}
+function showCard(){
+  const img=document.querySelector("#photo img"),go=()=>{$("cardimg").src=drawCard();$("cardimg").hidden=false;$("saveHint").hidden=false;$("env").hidden=true;$("letterLabel").hidden=true};
+  img.complete&&img.naturalWidth?go():img.addEventListener("load",go,{once:true});
+}
+function openLetter(){
+  $("letter").hidden=false;$("cardimg").hidden=true;$("saveHint").hidden=true;
+  const opened=store.get("xb-letter-date","")===dateKey();
+  $("env").classList.remove("open");$("env").hidden=opened;$("letterLabel").hidden=opened;
+  if(opened)showCard();
+}
+$("env").onclick=()=>{
+  $("env").classList.add("open");store.set("xb-letter-date",dateKey());$("newdot").hidden=true;
+  setTimeout(showCard,matchMedia("(prefers-reduced-motion:reduce)").matches?0:650);
+};
+$("openLetter").onclick=openLetter;
+$("closeLetter").onclick=()=>$("letter").hidden=true;
+$("letter").addEventListener("click",e=>{if(e.target===$("letter"))$("letter").hidden=true});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("letter").hidden=true});
+$("newdot").hidden=store.get("xb-letter-date","")===dateKey();
 
 seen.add(cur);render();
 </script>
