@@ -196,7 +196,7 @@ function clack(){
   }catch(e){}
 }
 /* The portrait is a small living scene, rather than a mood selector. */
-let pats=0,bt,idleTimer,playTimer,lastPet=0;
+let pats=0,bt,idleTimer,playTimer,lastPet=-Infinity;
 let done=false,picked=0;
 const reduced=matchMedia("(prefers-reduced-motion: reduce)");
 function say(text){
